@@ -57,6 +57,9 @@
     <ClCompile Include="Tetrominoes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TetrisPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllControlsScene.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tetrominoes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

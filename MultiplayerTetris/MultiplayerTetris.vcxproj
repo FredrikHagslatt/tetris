@@ -154,6 +154,7 @@
     <ClCompile Include="ScoreScreenScene.cpp" />
     <ClCompile Include="SoloGameScene.cpp" />
     <ClCompile Include="SplitScreenGameScene.cpp" />
+    <ClCompile Include="TetrisPlayer.cpp" />
     <ClCompile Include="Tetrominoes.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="ScoreScreenScene.h" />
     <ClInclude Include="SoloGameScene.h" />
     <ClInclude Include="SplitScreenGameScene.h" />
+    <ClInclude Include="TetrisPlayer.h" />
     <ClInclude Include="Tetrominoes.h" />
   </ItemGroup>
   <ItemGroup>
