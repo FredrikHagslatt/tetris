@@ -1,0 +1,15 @@
+
+Structure code
+
+endingScreen
+
+View next tetromino
+
+Anti-Cheat
+	Memory injection
+
+
+Lobby names:
+	Grotesque Ninja Warriors
+	Belgian Blues Musicians
+	Fleshripping Jollyhamsters
