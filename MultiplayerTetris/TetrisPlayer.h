@@ -23,6 +23,8 @@ private:
 	int rotation = 0;
 	int grid[gridWidth * gridHeight] = { 0 };
 
+	int GetX(int index);
+	int GetY(int index);
 	int GetIndex(int x, int y);
 
 	bool CheckCollisionRotation(int nextRotation);
@@ -44,6 +46,13 @@ private:
 public:
 	bool gameOver = false;
 
+	//grid placement
+	int yStart;	int yEnd;
+	int xStart;	int xEnd;
+	int section;
+	int edge;
+	int tile;
+
 	list<Tetromino*> tetrominoes; //Assigned by GameScene for sync in multiplayer
 	Tetromino* activeTetromino = nullptr;
 
@@ -56,9 +65,11 @@ public:
 	void SetDownAutoSpeed(float _downAutoSpeed);
 	void SpawnNewTetromino();
 
+	void DrawTetromino();
+	void DrawGrid();
 	void Controller(float fElapsedTime);
 
-	TetrisPlayer(olc::PixelGameEngine* _engine);
+	TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xStart);
 
 };
 

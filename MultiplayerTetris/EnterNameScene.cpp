@@ -1,7 +1,7 @@
 #include "EnterNameScene.h"
 #include "SceneManager.h"
 
-void EnterNameScene::Update(float fElapesedTime) {
+void EnterNameScene::Update(float fElapsedTime) {
 	if (sceneManager->data.playerName.size() < 12) {
 		if (engine->GetKey(olc::A).bPressed) { sceneManager->data.playerName += "A"; }
 		if (engine->GetKey(olc::B).bPressed) { sceneManager->data.playerName += "B"; }

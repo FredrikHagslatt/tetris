@@ -6,6 +6,8 @@ int TetrisPlayer::GetYPos() { return yPos; }
 int TetrisPlayer::GetRotation() { return rotation; }
 int TetrisPlayer::GetDeletedRows() { return deletedRows; }
 
+int TetrisPlayer::GetX(int index) { return index % 10; }
+int TetrisPlayer::GetY(int index) { return int(index / 10); }
 int TetrisPlayer::GetIndex(int x, int y) { return x + gridWidth * y; }
 
 void TetrisPlayer::SetDownAutoSpeed(float _downAutoSpeed) { downAutoSpeed = _downAutoSpeed; }
@@ -266,8 +268,6 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 		}
 	}
 
-
-
 	if (engine->GetKey(olc::DOWN).bPressed || engine->GetKey(olc::S).bPressed) { MoveDown(false); downHeldTimer = 0.0f; }
 	if (engine->GetKey(olc::LEFT).bPressed || engine->GetKey(olc::A).bPressed) { MoveLeft(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
 	if (engine->GetKey(olc::RIGHT).bPressed || engine->GetKey(olc::D).bPressed) { MoveRight(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
@@ -277,10 +277,42 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 	if (downAutoTimer >= downAutoSpeed) {
 		MoveDown(false);
 	}
-
 }
 
 
-TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine) {
+void TetrisPlayer::DrawTetromino() {
+	for (int i = 0; i < 16; i++) {
+		if (activeTetromino->shape[i]) {
+			engine->FillRect(xStart + edge + section * (xPos + activeTetromino->XOffset(i, rotation)),
+				yStart + edge + section * (yPos + activeTetromino->YOffset(i, rotation)),
+				tile,
+				tile,
+				colors[activeTetromino->color]);
+		}
+	}
+}
+
+
+void TetrisPlayer::DrawGrid() {
+	for (int i = 0; i < gridWidth * gridHeight; i++) {
+		engine->FillRect(xStart + edge + section * GetX(i),
+			yStart + edge + section * GetY(i),
+			tile,
+			tile,
+			colors[grid[i]]);
+	}
+}
+
+
+TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xStart) {
 	engine = _engine;
+	yStart = _yStart;
+	yEnd = _yEnd;
+	xStart = _xStart;
+
+	section = (yEnd - yStart) / gridHeight;
+	xEnd = xStart + section * gridWidth;
+
+	edge = section * 1 / 8;
+	tile = section * 7 / 8;
 }
