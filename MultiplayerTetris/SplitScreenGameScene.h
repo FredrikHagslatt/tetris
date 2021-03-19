@@ -24,7 +24,7 @@ private:
 	int GetY(int index);
 
 	//GameCore
-	void InitiateTetrominoes(TetrisPlayer* player);
+	void InitiateTetrominoes();
 	void ClearGame();
 	void EndGame();
 

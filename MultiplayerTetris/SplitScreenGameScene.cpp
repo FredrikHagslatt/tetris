@@ -11,14 +11,19 @@ void SplitScreenGameScene::ClearGame() {
 	player2->ClearGame();
 
 	gameTimer = 180.0f;
-	InitiateTetrominoes(player1);
-	InitiateTetrominoes(player2);
+	InitiateTetrominoes();
+	InitiateTetrominoes();
 }
 
 
-void SplitScreenGameScene::InitiateTetrominoes(TetrisPlayer* player) {
-	player->tetrominoes.clear();
-	player->activeTetromino = &tetrominoTypes[rand() % 7];
+void SplitScreenGameScene::InitiateTetrominoes() {
+	player1->tetrominoes.clear();
+	player2->tetrominoes.clear();
+
+	Tetromino* newTetromino = &tetrominoTypes[rand() % 7];
+	player1->activeTetromino = newTetromino;
+	player2->activeTetromino = newTetromino;
+	
 	//Make list of tetrominoes to sync between all players in multiplayer
 
 	for (int i = 0; i < 30; i++) {
@@ -28,7 +33,8 @@ void SplitScreenGameScene::InitiateTetrominoes(TetrisPlayer* player) {
 
 		while (tetrominoVec.size()) {
 			int index = rand() % tetrominoVec.size();
-			player->tetrominoes.push_back(tetrominoVec[index]);
+			player1->tetrominoes.push_back(tetrominoVec[index]);
+			player2->tetrominoes.push_back(tetrominoVec[index]);
 			tetrominoVec.erase(tetrominoVec.begin() + index);
 		}
 	}
@@ -84,8 +90,8 @@ void SplitScreenGameScene::Load() {
 
 	engine->Clear(olc::DARK_BLUE);
 
-	InitiateTetrominoes(player1);
-	InitiateTetrominoes(player2);
+	InitiateTetrominoes();
+	InitiateTetrominoes();
 
 	player1->SpawnNewTetromino();
 	player2->SpawnNewTetromino();
