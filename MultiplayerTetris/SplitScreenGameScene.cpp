@@ -46,9 +46,9 @@ void SplitScreenGameScene::SendRows(TetrisPlayer* sender, TetrisPlayer* recipien
 	if (sender->newlyDeletedRows == 2)
 		recipient->AddRows(1);
 	if (sender->newlyDeletedRows == 3)
-		recipient->AddRows(2);
+		recipient->AddRows(1);
 	if (sender->newlyDeletedRows == 4)
-		recipient->AddRows(3);
+		recipient->AddRows(2);
 }
 
 
