@@ -2,7 +2,6 @@
 #include "olcPixelGameEngine.h"
 #include "MultiplayerTetris.h"
 
-
 int main()
 {
 	MultiplayerTetris multiplayerTetris;
@@ -11,4 +10,3 @@ int main()
 		multiplayerTetris.Start();
 	return 0;
 }
-

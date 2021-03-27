@@ -32,7 +32,7 @@ void SoloGameScene::InitiateTetrominoes() {
 
 
 void SoloGameScene::EndGame() {
-	sceneManager->data.deletedRows = player->GetDeletedRows();
+	sceneManager->data.deletedRows = player->deletedRows;
 	sceneManager->ChangeScene("ScoreScreen");
 }
 
@@ -63,7 +63,7 @@ void SoloGameScene::RenderGraphics() {
 
 	engine->DrawString(engine->ScreenWidth() * 3 / 4, 10, "Deleted", olc::WHITE);
 	engine->DrawString(engine->ScreenWidth() * 3 / 4, 20, "rows: ", olc::WHITE);
-	engine->DrawString(engine->ScreenWidth() * 3 / 4, 30, to_string(player->GetDeletedRows()), olc::WHITE);
+	engine->DrawString(engine->ScreenWidth() * 3 / 4, 30, to_string(player->deletedRows), olc::WHITE);
 	engine->DrawString(engine->ScreenWidth() * 3 / 4, 40, "Seconds: ", olc::WHITE);
 	engine->DrawString(engine->ScreenWidth() * 3 / 4, 50, to_string(gameTimer), olc::WHITE);
 }

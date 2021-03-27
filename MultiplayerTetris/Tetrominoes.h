@@ -1,5 +1,4 @@
 #pragma once
-
 #include "olcPixelGameEngine.h"
 
 using namespace std;
@@ -26,7 +25,7 @@ struct Tetromino {
 	}
 };
 
-extern olc::Pixel colors[8];
+extern olc::Pixel colors[9];
 extern Tetromino I;
 extern Tetromino O;
 extern Tetromino T;

@@ -5,6 +5,8 @@ MultiplayerTetris::MultiplayerTetris() {
 }
 
 bool MultiplayerTetris::OnUserCreate(){
+	srand(time(NULL));
+
 	sceneManager = new SceneManager();
 	sceneManager->AddScene("EnterName", new EnterNameScene(this, sceneManager));
 	sceneManager->AddScene("Menu", new MenuScene(this, sceneManager));
@@ -18,8 +20,7 @@ bool MultiplayerTetris::OnUserCreate(){
 	sceneManager->AddScene("SplitScreenGame", new SplitScreenGameScene(this, sceneManager));
 	sceneManager->AddScene("OnlineGame", new OnlineGameScene(this, sceneManager));
 
-//	sceneManager->ChangeScene("EnterName");
-	sceneManager->ChangeScene("SplitScreenGame");
+	sceneManager->ChangeScene("EnterName");
 
 	return true;
 }

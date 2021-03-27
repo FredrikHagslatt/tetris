@@ -1,11 +1,5 @@
 #include "TetrisPlayer.h"
 
-int* TetrisPlayer::GetGrid() { return grid; }
-int TetrisPlayer::GetXPos() { return xPos; }
-int TetrisPlayer::GetYPos() { return yPos; }
-int TetrisPlayer::GetRotation() { return rotation; }
-int TetrisPlayer::GetDeletedRows() { return deletedRows; }
-
 int TetrisPlayer::GetX(int index) { return index % 10; }
 int TetrisPlayer::GetY(int index) { return int(index / 10); }
 int TetrisPlayer::GetIndex(int x, int y) { return x + gridWidth * y; }
@@ -97,6 +91,7 @@ void TetrisPlayer::DeleteRow(int row) {
 
 
 void TetrisPlayer::CheckRowDeletion() {
+	newlyDeletedRows = 0;
 	for (int y = 0; y < gridHeight; y++) {
 		bool rowFull = true;
 		for (int x = 0; x < gridWidth; x++) {
@@ -105,10 +100,11 @@ void TetrisPlayer::CheckRowDeletion() {
 			}
 		}
 		if (rowFull) {
-			deletedRows++;
+			newlyDeletedRows++;
 			DeleteRow(y);
 		}
 	}
+	deletedRows += newlyDeletedRows;
 }
 
 
@@ -122,6 +118,36 @@ void TetrisPlayer::WriteTetrominoToGrid() {
 }
 
 
+void TetrisPlayer::AddRows(int rows) {
+	if (rows == 0)
+		return;
+
+	//Move grid up
+	for (int i = 0; i < gridWidth * gridHeight - rows * gridWidth; i++) {
+		grid[i] = grid[i + rows * gridWidth];
+	}
+
+	//Fill row with blocks and gaps
+	for (int i = 1; i <= rows; i++) {
+		int ncolor = rand() % 7 + 1;
+		for (int j = gridWidth * gridHeight - i * gridWidth; j < gridWidth * gridHeight - i * gridWidth + gridWidth; j++) {
+			grid[j] = ncolor;
+		}
+
+		vector<int> indexes;
+		for (int j = 0; j < gridWidth; j++)
+			indexes.push_back(j);
+
+		shuffle(begin(indexes), end(indexes), rng);
+
+		int gaps = rand() % 2 + 1;
+		for (int j = 0; j < gaps; j++) {
+			grid[gridWidth * gridHeight - i * gridWidth + indexes.back()] = 0;
+			indexes.pop_back();
+		}
+	}
+}
+
 void TetrisPlayer::SpawnNewTetromino() {
 	xPos = int(gridWidth / 2 - 2);
 	yPos = -4;
@@ -131,15 +157,7 @@ void TetrisPlayer::SpawnNewTetromino() {
 	tetrominoes.push_back(activeTetromino);
 	while (yPos) {
 		if (!MoveDown(true)) {
-			//			if (gameState.multiplayerGame) {
-			//				cloudConnection.SendMultiplayerInfo();
-			//			}
-			//			else { //singleplayerGame
 			gameOver = true;
-			//				oldHighScore = cloudConnection.GetHighScore();
-			//				cloudConnection.SendSingleplayerRecord();
-			//			}
-			//			gameState.EndGame();
 			break;
 		}
 	}
@@ -214,19 +232,7 @@ void TetrisPlayer::HardDrop() {
 
 void TetrisPlayer::Controller(float fElapsedTime) {
 
-	if (engine->GetKey(olc::ESCAPE).bPressed) {
-		gameOver = true; //Pause menu will be implemented later
-	}
-
-	if (engine->GetKey(olc::UP).bPressed || engine->GetKey(olc::W).bPressed || engine->GetKey(olc::X).bPressed || engine->GetKey(olc::M).bPressed) {
-		RotateClockwise();
-	}
-
-	if (engine->GetKey(olc::Z).bPressed || engine->GetKey(olc::N).bPressed) {
-		RotateCounterClockwise();
-	}
-
-	if (engine->GetKey(olc::DOWN).bHeld || engine->GetKey(olc::S).bHeld) {
+	if (engine->GetKey(buttonSoftDrop).bHeld) {
 		downHeldTimer = downHeldTimer + fElapsedTime;
 		if (downHeldTimer >= 0.03) {
 			MoveDown(false);
@@ -234,7 +240,7 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 		}
 	}
 
-	if (engine->GetKey(olc::LEFT).bHeld || engine->GetKey(olc::A).bHeld) {
+	if (engine->GetKey(buttonLeft).bHeld) {
 		if (sideHeldStarted) {
 			sideHeldTimer = sideHeldTimer + fElapsedTime;
 			if (sideHeldTimer >= 0.05) {
@@ -251,7 +257,7 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 		}
 	}
 
-	if (engine->GetKey(olc::RIGHT).bHeld || engine->GetKey(olc::D).bHeld) {
+	if (engine->GetKey(buttonRight).bHeld) {
 		if (sideHeldStarted) {
 			sideHeldTimer = sideHeldTimer + fElapsedTime;
 			if (sideHeldTimer >= 0.05) {
@@ -268,10 +274,13 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 		}
 	}
 
-	if (engine->GetKey(olc::DOWN).bPressed || engine->GetKey(olc::S).bPressed) { MoveDown(false); downHeldTimer = 0.0f; }
-	if (engine->GetKey(olc::LEFT).bPressed || engine->GetKey(olc::A).bPressed) { MoveLeft(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
-	if (engine->GetKey(olc::RIGHT).bPressed || engine->GetKey(olc::D).bPressed) { MoveRight(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
-	if (engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ENTER).bPressed) { HardDrop(); }
+	if (engine->GetKey(buttonLeft).bPressed) { MoveLeft(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
+	if (engine->GetKey(buttonRight).bPressed) { MoveRight(); sideHeldStarted = false; sideHeldTimer = 0.0f; }
+	if (engine->GetKey(buttonSoftDrop).bPressed) { MoveDown(false); downHeldTimer = 0.0f; }
+	if (engine->GetKey(buttonHardDrop).bPressed) { HardDrop(); }
+	if (engine->GetKey(buttonRotateClockwise).bPressed) { RotateClockwise(); }
+	if (engine->GetKey(buttonRotateCounterClockwise).bPressed) { RotateCounterClockwise(); }
+	if (engine->GetKey(buttonPause).bPressed) {	gameOver = true; } // pause menu will be implemented later
 
 	downAutoTimer = downAutoTimer + fElapsedTime;
 	if (downAutoTimer >= downAutoSpeed) {

@@ -17,7 +17,6 @@ private:
 
 	float downAutoSpeed = 0.5f;
 	float speedIncreaseTimer = 0.0f;
-	float gameTimer = 180.f;
 
 	//Graphics
 	int GetX(int index);
@@ -27,6 +26,7 @@ private:
 	void InitiateTetrominoes();
 	void ClearGame();
 	void EndGame();
+	void SendRows(TetrisPlayer* sender, TetrisPlayer* recipient);
 
 	//Scene
 public:
