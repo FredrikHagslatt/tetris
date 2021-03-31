@@ -1,8 +1,6 @@
 #pragma once
 #include "Scene.h"
-class BasicControlsScene : public Scene{
-
-	//Scene
+class SplitScreenScoreScreenScene : public Scene {
 	void Update(float fElapsedTime) override;
 	void RenderGraphics() override;
 	void Load() override;

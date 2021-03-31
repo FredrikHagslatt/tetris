@@ -141,8 +141,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AllControlsScene.cpp" />
-    <ClCompile Include="BasicControlsScene.cpp" />
     <ClCompile Include="EnterNameScene.cpp" />
     <ClCompile Include="HighScoresScene.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,8 +156,6 @@
     <ClCompile Include="Tetrominoes.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllControlsScene.h" />
-    <ClInclude Include="BasicControlsScene.h" />
     <ClInclude Include="EnterNameScene.h" />
     <ClInclude Include="HighScoresScene.h" />
     <ClInclude Include="MenuScene.h" />

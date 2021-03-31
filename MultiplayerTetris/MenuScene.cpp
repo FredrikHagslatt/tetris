@@ -11,9 +11,7 @@ void MenuScene::Update(float fElapsedTime) {
 		case 1: { sceneManager->ChangeScene("SplitScreenGame"); break; }
 		case 2: { sceneManager->ChangeScene("OnlineGame"); break; }
 		case 3: { sceneManager->ChangeScene("HighScores"); break; }
-		case 4: { sceneManager->ChangeScene("BasicControls"); break; }
-		case 5: { sceneManager->ChangeScene("AllControls"); break; }
-		case 6: { exit(EXIT_SUCCESS); break; }
+		case 4: { exit(EXIT_SUCCESS); break; }
 		}
 	}
 }
@@ -24,9 +22,7 @@ void MenuScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 - 20, "Local Multiplayer", olc::WHITE, 3);
 	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 10, "Online Multiplayer", olc::WHITE, 3);
 	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 40, "Highscores", olc::WHITE, 3);
-	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 70, "Basic Controlls", olc::WHITE, 3);
-	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 100, "All Controlls", olc::WHITE, 3);
-	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 130, "Exit", olc::WHITE, 3);
+	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 3 + 70, "Exit", olc::WHITE, 3);
 	engine->FillCircle(engine->ScreenWidth() / 3 - 30, engine->ScreenHeight() / 3 + (menuPos - 1) * 30 - 10, 9);
 }
 

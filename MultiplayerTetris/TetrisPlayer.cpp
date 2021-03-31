@@ -322,6 +322,8 @@ TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd
 	section = (yEnd - yStart) / gridHeight;
 	xEnd = xStart + section * gridWidth;
 
+	cout << xStart << " " << xEnd << endl;
+
 	edge = section * 1 / 8;
 	tile = section * 7 / 8;
 }

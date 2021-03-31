@@ -3,8 +3,6 @@
 #include "SceneManager.h"
 #include "MenuScene.h"
 #include "HighScoresScene.h"
-#include "BasicControlsScene.h"
-#include "AllControlsScene.h"
 #include "EnterNameScene.h"
 #include "SoloGameScene.h"
 #include "SplitScreenGameScene.h"

@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AllControlsScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicControlsScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EnterNameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,12 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllControlsScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicControlsScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnterNameScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
