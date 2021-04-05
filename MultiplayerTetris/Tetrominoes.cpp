@@ -1,6 +1,6 @@
 #include "Tetrominoes.h"
 
-olc::Pixel colors[8] = { //DARK_BLUE IS USED BY GRID
+olc::Pixel colors[9] = { //DARK_BLUE IS USED BY GRID
 olc::DARK_GREY,
 olc::GREEN,
 olc::BLUE,
@@ -8,7 +8,8 @@ olc::YELLOW,
 olc::CYAN,
 olc::MAGENTA,
 olc::DARK_MAGENTA,
-olc::RED
+olc::RED,
+olc::WHITE
 };
 
 Tetromino I = { 1, 2,

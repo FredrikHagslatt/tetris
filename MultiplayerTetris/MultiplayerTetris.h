@@ -2,14 +2,13 @@
 #include "olcPixelGameEngine.h"
 #include "SceneManager.h"
 #include "MenuScene.h"
-#include "HighScoresScene.h"
-#include "BasicControlsScene.h"
-#include "AllControlsScene.h"
-#include "EnterNameScene.h"
+//#include "HighScoresScene.h"
+//#include "EnterNameScene.h"
 #include "SoloGameScene.h"
 #include "SplitScreenGameScene.h"
 #include "OnlineGameScene.h"
-#include "ScoreScreenScene.h"
+#include "SoloScoreScreenScene.h"
+#include "SplitScreenScoreScreenScene.h"
 //#include "CreditsScene.h"
 
 using namespace std;

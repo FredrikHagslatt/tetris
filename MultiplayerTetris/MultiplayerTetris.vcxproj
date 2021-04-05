@@ -141,8 +141,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AllControlsScene.cpp" />
-    <ClCompile Include="BasicControlsScene.cpp" />
     <ClCompile Include="EnterNameScene.cpp" />
     <ClCompile Include="HighScoresScene.cpp" />
     <ClCompile Include="main.cpp" />
@@ -151,15 +149,14 @@
     <ClCompile Include="OnlineGameScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="ScoreScreenScene.cpp" />
+    <ClCompile Include="SoloScoreScreenScene.cpp" />
     <ClCompile Include="SoloGameScene.cpp" />
     <ClCompile Include="SplitScreenGameScene.cpp" />
+    <ClCompile Include="SplitScreenScoreScreenScene.cpp" />
     <ClCompile Include="TetrisPlayer.cpp" />
     <ClCompile Include="Tetrominoes.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllControlsScene.h" />
-    <ClInclude Include="BasicControlsScene.h" />
     <ClInclude Include="EnterNameScene.h" />
     <ClInclude Include="HighScoresScene.h" />
     <ClInclude Include="MenuScene.h" />
@@ -168,9 +165,10 @@
     <ClInclude Include="OnlineGameScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="ScoreScreenScene.h" />
+    <ClInclude Include="SoloScoreScreenScene.h" />
     <ClInclude Include="SoloGameScene.h" />
     <ClInclude Include="SplitScreenGameScene.h" />
+    <ClInclude Include="SplitScreenScoreScreenScene.h" />
     <ClInclude Include="TetrisPlayer.h" />
     <ClInclude Include="Tetrominoes.h" />
   </ItemGroup>

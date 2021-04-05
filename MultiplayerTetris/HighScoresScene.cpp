@@ -1,7 +1,7 @@
 #include "HighScoresScene.h"
 #include "SceneManager.h"
 
-void HighScoresScene::Update(float fElapesedTime) {
+void HighScoresScene::Update(float fElapsedTime) {
 	if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 		sceneManager->ChangeScene("Menu");
 	}

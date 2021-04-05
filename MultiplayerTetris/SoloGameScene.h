@@ -18,9 +18,6 @@ private:
 	//Graphics
 	int GetX(int index);
 	int GetY(int index);
-	void DrawPos(int board, int x, int y, olc::Pixel color);
-	void DrawGrid(int board);
-	void DrawTetromino(int x, int y);
 
 	//GameCore
 	void InitiateTetrominoes();

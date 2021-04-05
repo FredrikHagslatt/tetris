@@ -1,12 +1,41 @@
 #pragma once
 #include "Scene.h"
+#include "Tetrominoes.h"
+#include "TetrisPlayer.h"
+
+
 class SplitScreenGameScene : public Scene {
 
+
+#define gridWidth 10
+#define gridHeight 18
+
+private:
+
+	TetrisPlayer* player1 = nullptr;
+	TetrisPlayer* player2 = nullptr;
+
+	float downAutoSpeed = 0.5f;
+	float speedIncreaseTimer = 0.0f;
+	float timePlayed = 0.0f;
+
+	//Graphics
+	int GetX(int index);
+	int GetY(int index);
+
+	//GameCore
+	void InitiateTetrominoes();
+	void ClearGame();
+	void EndGame();
+	void SendRows(TetrisPlayer* sender, TetrisPlayer* recipient);
+
 	//Scene
+public:
 	void Update(float fElapsedTime) override;
 	void RenderGraphics() override;
 	void Load() override;
 	void Unload() override;
 	using Scene::Scene;
+
 };
 
