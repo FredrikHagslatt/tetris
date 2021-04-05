@@ -52,6 +52,7 @@ public:
 	int newlyDeletedRows = 0;
 	float downAutoSpeed = 0.5f;
 	int deletedRows = 0;
+	int sentRows = 0;
 
 	//grid placement
 	int yStart;	int yEnd;
@@ -82,7 +83,7 @@ public:
 	void DrawGrid();
 	void Controller(float fElapsedTime);
 
-	TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xStart);
+	TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xCenter);
 
 };
 

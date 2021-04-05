@@ -39,7 +39,7 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreScreenScene.cpp">
+    <ClCompile Include="SoloScoreScreenScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SoloGameScene.cpp">
@@ -52,6 +52,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TetrisPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SplitScreenScoreScreenScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +83,7 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreScreenScene.h">
+    <ClInclude Include="SoloScoreScreenScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SoloGameScene.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TetrisPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitScreenScoreScreenScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

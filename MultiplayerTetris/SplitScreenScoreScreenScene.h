@@ -7,4 +7,3 @@ class SplitScreenScoreScreenScene : public Scene {
 	void Unload() override;
 	using Scene::Scene;
 };
-

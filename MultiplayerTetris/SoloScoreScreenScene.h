@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-class ScoreScreenScene : public Scene {
+class SoloScoreScreenScene : public Scene {
 
 	void Update(float fElapsedTime) override;
 	void RenderGraphics() override;

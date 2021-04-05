@@ -313,16 +313,13 @@ void TetrisPlayer::DrawGrid() {
 }
 
 
-TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xStart) {
+TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xCenter) {
 	engine = _engine;
 	yStart = _yStart;
 	yEnd = _yEnd;
-	xStart = _xStart;
-
 	section = (yEnd - yStart) / gridHeight;
-	xEnd = xStart + section * gridWidth;
-
-	cout << xStart << " " << xEnd << endl;
+	xStart = _xCenter - section * gridWidth / 2;
+	xEnd = _xCenter + section * gridWidth / 2;
 
 	edge = section * 1 / 8;
 	tile = section * 7 / 8;

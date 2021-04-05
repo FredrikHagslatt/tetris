@@ -3,8 +3,8 @@
 
 
 void Scene::Cycle(float fElapsedTime) {
-	Update(fElapsedTime);
 	RenderGraphics();
+	Update(fElapsedTime);
 }
 
 

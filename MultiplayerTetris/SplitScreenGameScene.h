@@ -17,6 +17,7 @@ private:
 
 	float downAutoSpeed = 0.5f;
 	float speedIncreaseTimer = 0.0f;
+	float timePlayed = 0.0f;
 
 	//Graphics
 	int GetX(int index);
