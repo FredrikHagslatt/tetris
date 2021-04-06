@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.h"
 #include "Scene.h"
 #include <iostream>
 #include <string>
@@ -8,7 +9,8 @@ using namespace std;
 class SceneManager{
 private:
 	Scene* currentScene;
-	unordered_map<string, Scene*> scenes;
+//	unordered_map<string, Scene*> scenes;
+	Scene* scenes[SCENES];
 
 	struct playerStruct {
 		string playerName = "";
@@ -26,9 +28,9 @@ public:
 		playerStruct player2;
 	} data;
 
-	void ChangeScene(string sceneName);
+	void ChangeScene(int index);
 	void Cycle(float fElapsedTime);
-	void AddScene(string sceneName, Scene* scene);
+	void AddScene(int index, Scene* scene);
 	SceneManager();
 
 };

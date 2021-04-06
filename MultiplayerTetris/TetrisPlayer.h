@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.h"
 #include "olcPixelGameEngine.h"
 #include "Tetrominoes.h"
 #include <algorithm>
@@ -7,9 +8,6 @@
 using namespace std;
 
 class TetrisPlayer{
-
-#define gridWidth 10
-#define gridHeight 18
 
 private:
 

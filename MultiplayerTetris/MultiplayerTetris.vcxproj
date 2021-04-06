@@ -157,6 +157,7 @@
     <ClCompile Include="Tetrominoes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="EnterNameScene.h" />
     <ClInclude Include="HighScoresScene.h" />
     <ClInclude Include="MenuScene.h" />

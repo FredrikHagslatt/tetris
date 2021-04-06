@@ -70,7 +70,7 @@ void SplitScreenGameScene::EndGame() {
 	sceneManager->data.player2.sentRows = 1;
 
 	sceneManager->data.timePlayed = timePlayed;
-	sceneManager->ChangeScene("SplitScreenScoreScreen");
+	sceneManager->ChangeScene(SPLITSCREENSCORESCREEN);
 }
 
 
