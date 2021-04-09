@@ -7,6 +7,8 @@
 class SplitScreenGameScene : public Scene {
 
 private:
+	bool gameStarted = false;
+	bool gameFinished = false;
 
 	TetrisPlayer* player1 = nullptr;
 	TetrisPlayer* player2 = nullptr;

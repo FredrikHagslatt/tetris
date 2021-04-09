@@ -9,7 +9,6 @@ using namespace std;
 class SceneManager{
 private:
 	Scene* currentScene;
-//	unordered_map<string, Scene*> scenes;
 	Scene* scenes[SCENES];
 
 	struct playerStruct {
