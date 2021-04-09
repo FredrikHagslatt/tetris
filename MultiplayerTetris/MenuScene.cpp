@@ -7,9 +7,9 @@ void MenuScene::Update(float fElapsedTime) {
 	if (engine->GetKey(olc::ESCAPE).bPressed) { exit(EXIT_SUCCESS); }
 	if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed) {
 		switch (menuPos) {
-		case 0: { sceneManager->ChangeScene("SoloGame"); break; }
-		case 1: { sceneManager->ChangeScene("SplitScreenGame"); break; }
-		case 2: { sceneManager->ChangeScene("OnlineGame"); break; }
+		case 0: { sceneManager->ChangeScene(SOLOGAME); break; }
+		case 1: { sceneManager->ChangeScene(SPLITSCREENGAME); break; }
+		case 2: { sceneManager->ChangeScene(ONLINEGAME); break; }
 		case 3: { exit(EXIT_SUCCESS); break; }
 		}
 	}

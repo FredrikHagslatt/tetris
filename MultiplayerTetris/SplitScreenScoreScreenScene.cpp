@@ -3,7 +3,7 @@
 
 void SplitScreenScoreScreenScene::Update(float fElapsedTime) {
 	if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
-		sceneManager->ChangeScene("Menu");
+		sceneManager->ChangeScene(MENU);
 }
 
 
@@ -11,7 +11,7 @@ void SplitScreenScoreScreenScene::RenderGraphics() {
 	//Import deleted rows from engine->gameStats
 	engine->Clear(olc::DARK_BLUE);
 
-	if (sceneManager->data.player1.gameOver && sceneManager->data.player1.gameOver) {
+	if (sceneManager->data.player1.gameOver && sceneManager->data.player2.gameOver) {
 		engine->DrawString(engine->ScreenWidth() * 3 / 10, engine->ScreenHeight() / 6, "Game is a draw!:", olc::WHITE, 2);
 	}
 	else if (sceneManager->data.player1.gameOver) {

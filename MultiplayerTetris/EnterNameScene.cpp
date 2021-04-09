@@ -36,7 +36,7 @@ void EnterNameScene::Update(float fElapsedTime) {
 	}
 
 	if (engine->GetKey(olc::ENTER).bPressed && sceneManager->data.player1.playerName.size() > 0) {
-		sceneManager->ChangeScene("Menu");
+		sceneManager->ChangeScene(MENU);
 	}
 
 }

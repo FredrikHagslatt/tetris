@@ -66,11 +66,11 @@ void SplitScreenGameScene::EndGame() {
 	sceneManager->data.player1.deletedRows = player1->deletedRows;
 	sceneManager->data.player1.sentRows = player1->sentRows;
 
-	sceneManager->data.player2.deletedRows = 3;
-	sceneManager->data.player2.sentRows = 1;
+	sceneManager->data.player2.deletedRows = player2->deletedRows;
+	sceneManager->data.player2.sentRows = player2->sentRows;
 
 	sceneManager->data.timePlayed = timePlayed;
-	sceneManager->ChangeScene("SplitScreenScoreScreen");
+	sceneManager->ChangeScene(SPLITSCREENSCORESCREEN);
 }
 
 

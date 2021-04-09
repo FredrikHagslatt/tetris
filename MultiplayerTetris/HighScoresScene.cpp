@@ -3,9 +3,8 @@
 
 void HighScoresScene::Update(float fElapsedTime) {
 	if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
-		sceneManager->ChangeScene("Menu");
+		sceneManager->ChangeScene(MENU);
 	}
-
 }
 
 void HighScoresScene::RenderGraphics() {

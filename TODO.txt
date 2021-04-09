@@ -1,0 +1,19 @@
+Player 1 wins != draw
+Show game board at the end of the game
+Start button on all game modes
+
+Move tetromino if rotation is blocked by wall
+
+View next tetromino
+
+Anti-Cheat
+	Memory injection
+
+
+Lobby names:
+	Grotesque Ninja Warriors
+	Belgian Blues Musicians
+	Fleshripping Jollyhamsters
+
+	Noisy Ninjas
+

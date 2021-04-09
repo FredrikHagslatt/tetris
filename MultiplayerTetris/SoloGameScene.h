@@ -5,9 +5,6 @@
 
 class SoloGameScene : public Scene{
 
-#define gridWidth 10
-#define gridHeight 18
-
 private:
 
 	TetrisPlayer* player = nullptr;

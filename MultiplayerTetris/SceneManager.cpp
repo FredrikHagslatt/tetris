@@ -1,14 +1,14 @@
 #include "SceneManager.h"
 
-void SceneManager::ChangeScene(string sceneName) {
+void SceneManager::ChangeScene(int index) {
 	if (currentScene)
 		currentScene->Unload();
-	currentScene = scenes.find(sceneName)->second;
+	currentScene = scenes[index];
 	currentScene->Load();
 }
 
-void SceneManager::AddScene(string sceneName, Scene* scene) {
-	scenes.insert({ sceneName, scene });
+void SceneManager::AddScene(int index, Scene* scene) {
+	scenes[index] = scene;
 }
 
 

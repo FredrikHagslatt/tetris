@@ -5,10 +5,6 @@
 
 class OnlineGameScene : public Scene {
 
-#define gridWidth 10
-#define gridHeight 18
-
-
 private:
 
 	void Update(float fElapsedTime) override;

@@ -6,11 +6,9 @@
 
 class SplitScreenGameScene : public Scene {
 
-
-#define gridWidth 10
-#define gridHeight 18
-
 private:
+	bool gameStarted = false;
+	bool gameFinished = false;
 
 	TetrisPlayer* player1 = nullptr;
 	TetrisPlayer* player2 = nullptr;

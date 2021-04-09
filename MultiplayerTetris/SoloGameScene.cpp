@@ -33,7 +33,7 @@ void SoloGameScene::InitiateTetrominoes() {
 
 void SoloGameScene::EndGame() {
 	sceneManager->data.player1.deletedRows = player->deletedRows;
-	sceneManager->ChangeScene("SoloScoreScreen");
+	sceneManager->ChangeScene(SOLOSCORESCREEN);
 }
 
 
