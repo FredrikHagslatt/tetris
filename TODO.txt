@@ -1,4 +1,3 @@
-Player 1 wins != draw
 Show game board at the end of the game
 Start button on all game modes
 

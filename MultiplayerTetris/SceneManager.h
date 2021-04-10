@@ -11,20 +11,11 @@ private:
 	Scene* currentScene;
 	Scene* scenes[SCENES];
 
-	struct playerStruct {
-		string playerName = "";
-		int deletedRows = 0;
-		int sentRows = 0;
-		bool gameOver = false;
-	};
-
 public:
 
 	struct dataStruct {
+		string playerName = "";
 		int bestSoloScore = 0;
-		float timePlayed = 0.0f;
-		playerStruct player1;
-		playerStruct player2;
 	} data;
 
 	void ChangeScene(int index);

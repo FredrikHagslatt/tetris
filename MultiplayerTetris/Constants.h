@@ -1,7 +1,7 @@
 #pragma once
 
 #define gridWidth 10
-#define gridHeight 18
+#define gridHeight 20
 
 #define MENU 0
 #define ENTERNAME 1

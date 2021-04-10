@@ -15,5 +15,5 @@ public:
 	virtual void Load() = 0; //Preparation for music etc
 	virtual void Unload() = 0;
 	void Cycle(float fElapsedTime);
-	Scene(olc::PixelGameEngine* _engine, SceneManager* sceneManager);
+	Scene(olc::PixelGameEngine* _engine, SceneManager* _sceneManager);
 };

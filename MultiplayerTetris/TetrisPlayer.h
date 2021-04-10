@@ -72,7 +72,6 @@ public:
 	list<Tetromino*> tetrominoes; //Assigned by GameScene for sync in multiplayer
 	Tetromino* activeTetromino = nullptr;
 
-	void ClearGame();
 	void SetDownAutoSpeed(float _downAutoSpeed);
 	void SpawnNewTetromino();
 	void AddRows(int rows);

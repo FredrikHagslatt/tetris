@@ -3,16 +3,7 @@
 int TetrisPlayer::GetX(int index) { return index % 10; }
 int TetrisPlayer::GetY(int index) { return int(index / 10); }
 int TetrisPlayer::GetIndex(int x, int y) { return x + gridWidth * y; }
-
 void TetrisPlayer::SetDownAutoSpeed(float _downAutoSpeed) { downAutoSpeed = _downAutoSpeed; }
-
-
-void TetrisPlayer::ClearGame() {
-	deletedRows = 0;
-	for (int i = 0; i < gridWidth * gridHeight; i++) {
-		grid[i] = 0;
-	}
-}
 
 
 bool TetrisPlayer::CheckCollisionRotation(int nextRotation) {

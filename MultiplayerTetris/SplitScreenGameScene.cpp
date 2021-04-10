@@ -1,4 +1,4 @@
-#include "SplitScreenGameScene.h"
+﻿#include "SplitScreenGameScene.h"
 #include "SceneManager.h"
 
 
@@ -6,14 +6,16 @@ int SplitScreenGameScene::GetX(int index) { return index % 10; }
 int SplitScreenGameScene::GetY(int index) { return int(index / 10); }
 
 
-void SplitScreenGameScene::ClearGame() {
-	speedIncreaseTimer = 0;
+void SplitScreenGameScene::DrawBoxString(int x, int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+	olc::vi2d textSize = engine->GetTextSize(text) * scale;
+	engine->FillRect(x - 2, y - 2, textSize.x + 3, textSize.y + 3, backColor);
+	engine->DrawString(x, y, text, textColor, scale);
+}
 
-	player1->ClearGame();
-	player2->ClearGame();
 
-	InitiateTetrominoes();
-	InitiateTetrominoes();
+void SplitScreenGameScene::DrawBoxString(int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+	int x = (engine->ScreenWidth() - engine->GetTextSize(text).x * scale) / 2;
+	DrawBoxString(x, y, text, scale, textColor, backColor);
 }
 
 
@@ -58,43 +60,40 @@ void SplitScreenGameScene::SendRows(TetrisPlayer* sender, TetrisPlayer* recipien
 }
 
 
-void SplitScreenGameScene::EndGame() {
-
-	sceneManager->data.player1.gameOver = player1->gameOver;
-	sceneManager->data.player2.gameOver = player2->gameOver;
-
-	sceneManager->data.player1.deletedRows = player1->deletedRows;
-	sceneManager->data.player1.sentRows = player1->sentRows;
-
-	sceneManager->data.player2.deletedRows = player2->deletedRows;
-	sceneManager->data.player2.sentRows = player2->sentRows;
-
-	sceneManager->data.timePlayed = timePlayed;
-	sceneManager->ChangeScene(SPLITSCREENSCORESCREEN);
-}
-
-
 void SplitScreenGameScene::Update(float fElapsedTime) {
-	timePlayed += fElapsedTime;
 
-	speedIncreaseTimer += fElapsedTime;
-	if (speedIncreaseTimer > 180.0f && downAutoSpeed > 0.3f) {
-		speedIncreaseTimer = 0.0f;
-		downAutoSpeed -= 0.1f;
-		player1->SetDownAutoSpeed(downAutoSpeed);
-		player2->SetDownAutoSpeed(downAutoSpeed);
+	if (!gameStarted) {
+		if (engine->GetKey(olc::ENTER).bPressed)
+			gameStarted = true;
+		else if (engine->GetKey(olc::ESCAPE).bPressed) {
+			sceneManager->ChangeScene(MENU);
+		}
 	}
-	player1->Controller(fElapsedTime);
-	player2->Controller(fElapsedTime);
+	else if (gameFinished) {
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
+			sceneManager->ChangeScene(MENU);
+	}
+	else { //Game running
+		timePlayed += fElapsedTime;
 
-	SendRows(player1, player2);
-	SendRows(player2, player1);
+		speedIncreaseTimer += fElapsedTime;
+		if (speedIncreaseTimer > 180.0f && downAutoSpeed > 0.3f) {
+			speedIncreaseTimer = 0.0f;
+			downAutoSpeed -= 0.1f;
+			player1->SetDownAutoSpeed(downAutoSpeed);
+			player2->SetDownAutoSpeed(downAutoSpeed);
+		}
+		player1->Controller(fElapsedTime);
+		player2->Controller(fElapsedTime);
 
-	player1->newlyDeletedRows = 0;
-	player2->newlyDeletedRows = 0;
+		SendRows(player1, player2);
+		SendRows(player2, player1);
 
-	if (player1->gameOver || player2->gameOver) { EndGame(); }
+		player1->newlyDeletedRows = 0;
+		player2->newlyDeletedRows = 0;
 
+		if (player1->gameOver || player2->gameOver) { gameFinished = true; }
+	}
 }
 
 
@@ -107,7 +106,7 @@ void SplitScreenGameScene::RenderGraphics() {
 	player2->DrawTetromino();
 
 	//player1 controls
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 - 5,		"Controls:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 - 5,  "Controls:", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 15, "Left Arrow:", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 25, "Move Left", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 40, "Right Arrow:", olc::WHITE, 1);
@@ -125,7 +124,7 @@ void SplitScreenGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 180, "Hard Drop", olc::WHITE, 1);
 
 	//player2 controls
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 - 5,		"Controls:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 - 5,	"Controls:", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 15, "A:", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 25, "Move Left", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 40, "D:", olc::WHITE, 1);
@@ -141,16 +140,44 @@ void SplitScreenGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 155, "clockwise", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 170, "TAB:", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 180, "Hard Drop", olc::WHITE, 1);
+
+	if (!gameStarted) {
+		DrawBoxString(engine->ScreenHeight() / 2, "Press ENTER to start the game");
+	}
+	else if (gameFinished) {
+		if (player1->gameOver && player2->gameOver) {
+			DrawBoxString(engine->ScreenHeight() / 3, "Game is a draw!:", 2);
+		}
+		else if (player1->gameOver) {
+			DrawBoxString(engine->ScreenHeight() / 3, "Player 2 is the winner!", 2);
+		}
+		else {
+			DrawBoxString(engine->ScreenHeight() / 3, "Player 1 is the winner!", 2);
+		}
+		DrawBoxString(engine->ScreenHeight() / 2 - 20, "Time played: " + to_string((int)timePlayed) + " seconds");
+		DrawBoxString(engine->ScreenHeight() / 2, "Player:          1           2");
+		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Deleted Rows:    " 
+			+ to_string(player1->deletedRows) 
+			+ "           " 
+			+ to_string(player2->deletedRows));
+		DrawBoxString(engine->ScreenHeight() / 2 + 20, "Sent Rows:       " 
+			+ to_string(player1->sentRows) 
+			+ "           " 
+			+ to_string(player2->sentRows));
+	}
 }
 
 
 void SplitScreenGameScene::Load() {
+	gameStarted = false;
+	gameFinished = false;
+
 	player1 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 7 / 20);
 	player2 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 13 / 20);
 
-	timePlayed = 0.0f;
-	speedIncreaseTimer = 0.0f;
 	downAutoSpeed = 0.5f;
+	speedIncreaseTimer = 0.0f;
+	timePlayed = 0.0f;
 
 	player1->downAutoSpeed = downAutoSpeed;
 	player2->downAutoSpeed = downAutoSpeed;
