@@ -142,13 +142,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EnterNameScene.cpp" />
-    <ClCompile Include="HighScoresScene.cpp" />
+    <ClCompile Include="LeaderboardScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="MultiplayerTetris.cpp" />
     <ClCompile Include="OnlineGameScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ServerConnectionEmscripten.cpp" />
     <ClCompile Include="SoloGameScene.cpp" />
     <ClCompile Include="SplitScreenGameScene.cpp" />
     <ClCompile Include="TetrisPlayer.cpp" />
@@ -157,13 +158,14 @@
   <ItemGroup>
     <ClInclude Include="Constants.h" />
     <ClInclude Include="EnterNameScene.h" />
-    <ClInclude Include="HighScoresScene.h" />
+    <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="MultiplayerTetris.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
     <ClInclude Include="OnlineGameScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ServerConnectionEmscripten.h" />
     <ClInclude Include="SoloGameScene.h" />
     <ClInclude Include="SplitScreenGameScene.h" />
     <ClInclude Include="TetrisPlayer.h" />
@@ -172,7 +174,17 @@
   <ItemGroup>
     <Text Include="TODO.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\nlohmann.json.3.9.1\build\native\nlohmann.json.targets" Condition="Exists('..\packages\nlohmann.json.3.9.1\build\native\nlohmann.json.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\nlohmann.json.3.9.1\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nlohmann.json.3.9.1\build\native\nlohmann.json.targets'))" />
+  </Target>
 </Project>

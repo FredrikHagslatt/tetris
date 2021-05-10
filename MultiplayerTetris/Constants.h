@@ -5,7 +5,7 @@
 
 #define MENU 0
 #define ENTERNAME 1
-#define HIGHSCORES 2
+#define LEADERBOARD 2
 #define SOLOSCORESCREEN 3
 #define SPLITSCREENSCORESCREEN 4
 #define SOLOGAME 5

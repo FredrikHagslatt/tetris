@@ -3,7 +3,7 @@
 #include "olcPixelGameEngine.h"
 #include "SceneManager.h"
 #include "MenuScene.h"
-#include "HighScoresScene.h"
+#include "LeaderboardScene.h"
 #include "EnterNameScene.h"
 #include "SoloGameScene.h"
 #include "SplitScreenGameScene.h"
@@ -22,5 +22,4 @@ public:
 
 	bool OnUserCreate() override;
 	bool OnUserUpdate(float fElapsedTime) override;
-
 };

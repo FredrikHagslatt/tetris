@@ -9,10 +9,7 @@ bool MultiplayerTetris::OnUserCreate(){
 	sceneManager = new SceneManager();
 	sceneManager->AddScene(MENU, new MenuScene(this, sceneManager));
 	sceneManager->AddScene(ENTERNAME, new EnterNameScene(this, sceneManager));
-	sceneManager->AddScene(HIGHSCORES, new HighScoresScene(this, sceneManager));
-//	sceneManager->AddScene(SOLOSCORESCREEN, new SoloScoreScreenScene(this, sceneManager));
-//	sceneManager->AddScene(SPLITSCREENSCORESCREEN, new SplitScreenScoreScreenScene(this, sceneManager));
-
+	sceneManager->AddScene(LEADERBOARD, new LeaderboardScene(this, sceneManager));
 
 	sceneManager->AddScene(SOLOGAME, new SoloGameScene(this, sceneManager));
 	sceneManager->AddScene(SPLITSCREENGAME, new SplitScreenGameScene(this, sceneManager));
