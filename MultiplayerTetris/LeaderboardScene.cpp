@@ -7,7 +7,8 @@ void LeaderboardScene::Update(float fElapesedTime) {
 }
 
 void LeaderboardScene::RenderGraphics() {
-    
+    serverCon.RefreshLeaderboard();
+
     engine->Clear(olc::DARK_BLUE);
 
     engine->DrawString(engine->ScreenWidth() / 4, 10, "Players:", olc::WHITE);
