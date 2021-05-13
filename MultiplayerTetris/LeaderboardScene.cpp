@@ -18,8 +18,8 @@ void LeaderboardScene::RenderGraphics() {
         engine->DrawString(engine->ScreenWidth() / 5, 10 * i + 30, to_string(i + 1), olc::WHITE);
 
         if (i < size(serverCon.leaderboard)) {
-            engine->DrawString(engine->ScreenWidth() / 4, 10 * i + 30, serverCon.leaderboard[to_string(i)]["playerName"], olc::WHITE);
-            engine->DrawString(engine->ScreenWidth() * 2 / 3, 10 * i + 30, serverCon.leaderboard[to_string(i)]["score"], olc::WHITE);
+            engine->DrawString(engine->ScreenWidth() / 4, 10 * i + 30, serverCon.leaderboard[i].first, olc::WHITE);
+            engine->DrawString(engine->ScreenWidth() * 2 / 3, 10 * i + 30, to_string(serverCon.leaderboard[i].second), olc::WHITE);
         }
     }
 }
