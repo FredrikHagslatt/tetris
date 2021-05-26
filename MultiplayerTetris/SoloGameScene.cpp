@@ -64,6 +64,10 @@ void SoloGameScene::Update(float fElapsedTime) {
 
 		if (player->gameOver) { 
 			gameFinished = true;
+			if (sceneManager->data.bestSoloScore < player->deletedRows) {
+				sceneManager->data.bestSoloScore = player->deletedRows;
+				sceneManager->serverCon.PostHighscore(sceneManager->data.playerName, player->deletedRows);
+			}
 			if (gameTimer < 0.0f) {
 				gameTimer = 0.0f;
 			}

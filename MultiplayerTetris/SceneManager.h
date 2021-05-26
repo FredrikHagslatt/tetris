@@ -1,6 +1,7 @@
 #pragma once
 #include "Constants.h"
 #include "Scene.h"
+#include "ServerConnectionEmscripten.h"
 #include <iostream>
 #include <string>
 
@@ -13,6 +14,7 @@ private:
 
 public:
 
+	ServerConnectionEmscripten serverCon;
 	struct dataStruct {
 		string playerName = "";
 		int bestSoloScore = 0;

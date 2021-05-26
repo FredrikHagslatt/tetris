@@ -1,11 +1,9 @@
 #include "ServerConnectionEmscripten.h"
 
 string globString = "FREPPAN,59;KARIN,35;RAJ,34;GANDALF,28";
+ServerConnectionEmscripten::ServerConnectionEmscripten() { FetchLeaderboard(); }
 
 #if defined(__EMSCRIPTEN__)
-
-//string globString = "{ \"0\":{\"playerName\":\"FREPPAN\",\"score\" : \"59\"},\"1\" : {\"playerName\":\"KARIN\",\"score\" : \"35\"},\"2\" : {\"playerName\":\"RAJ\",\"score\" : \"34\"},\"3\" : {\"playerName\":\"GANDALF\",\"score\" : \"28\"},\"4\" : {\"playerName\":\"FIPPOO\",\"score\" : \"28\"},\"5\" : {\"playerName\":\"MANJIT\",\"score\" : \"25\"},\"6\" : {\"playerName\":\"FIPPO\",\"score\" : \"22\"},\"7\" : {\"playerName\":\"FIII\",\"score\" : \"20\"},\"8\" : {\"playerName\":\"RAGGIS\",\"score\" : \"20\"},\"9\" : {\"playerName\":\"ROBBELIBOBBA\",\"score\" : \"19\"},\"10\" : {\"playerName\":\"QWE\",\"score\" : \"3\"},\"11\" : {\"playerName\":\"EKAS\",\"score\" : \"2\"},\"12\" : {\"playerName\":\"ASDASD\",\"score\" : \"1\"},\"13\" : {\"playerName\":\"ASD\",\"score\" : \"0\"} }";
-
 void downloadSucceeded(emscripten_fetch_t *fetch) {
     printf("Finished downloading %llu bytes from URL %s.\n", fetch->numBytes, fetch->url);
     // The data is now available at fetch->data[0] through fetch->data[fetch->numBytes-1];
@@ -22,15 +20,7 @@ void downloadFailed(emscripten_fetch_t *fetch) {
     emscripten_fetch_close(fetch); // Also free data on failure.
 }
 
-#endif
-
-
-ServerConnectionEmscripten::ServerConnectionEmscripten() { FetchLeaderboard(); }
-
 void ServerConnectionEmscripten::FetchLeaderboard() {
-#if defined(__EMSCRIPTEN__)
-
-
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     strcpy(attr.requestMethod, "GET");
@@ -40,9 +30,32 @@ void ServerConnectionEmscripten::FetchLeaderboard() {
 //    emscripten_fetch(&attr, "info.json");
     emscripten_fetch(&attr, "get_leaderboard.php");
     cout << "FetchLeaderboard " << globString << endl;
+}
+
+void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
+    emscripten_fetch_attr_t attr;
+    emscripten_fetch_attr_init(&attr);
+    strcpy(attr.requestMethod, "POST");
+    attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
+    attr.onsuccess = downloadSucceeded;
+    attr.onerror = downloadFailed;
+
+    const char* headers[] = { "Content-Type", "application/x-www-form-urlencoded", 0 };
+    attr.requestHeaders = headers;
+
+    attr.requestData = "playerName=deWASM&score=3";
+    attr.requestDataSize = strlen(attr.requestData);
+    emscripten_fetch(&attr, "save_singleplayer_record.php");
+}
+
+#else
+void ServerConnectionEmscripten::FetchLeaderboard() {}
+void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
+    cout << "Posting " << endl;
+}
+
 #endif
 
-}
 
 void ServerConnectionEmscripten::RefreshLeaderboard() {
     leaderboard = ParseLeaderboard(globString);

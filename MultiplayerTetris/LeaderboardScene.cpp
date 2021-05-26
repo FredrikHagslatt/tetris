@@ -7,7 +7,7 @@ void LeaderboardScene::Update(float fElapesedTime) {
 }
 
 void LeaderboardScene::RenderGraphics() {
-    serverCon.RefreshLeaderboard();
+    sceneManager->serverCon.RefreshLeaderboard();
 
     engine->Clear(olc::DARK_BLUE);
 
@@ -17,15 +17,15 @@ void LeaderboardScene::RenderGraphics() {
     for (unsigned int i = 0; i < 30; i++) {
         engine->DrawString(engine->ScreenWidth() / 5, 10 * i + 30, to_string(i + 1), olc::WHITE);
 
-        if (i < size(serverCon.leaderboard)) {
-            engine->DrawString(engine->ScreenWidth() / 4, 10 * i + 30, serverCon.leaderboard[i].first, olc::WHITE);
-            engine->DrawString(engine->ScreenWidth() * 2 / 3, 10 * i + 30, to_string(serverCon.leaderboard[i].second), olc::WHITE);
+        if (i < size(sceneManager->serverCon.leaderboard)) {
+            engine->DrawString(engine->ScreenWidth() / 4, 10 * i + 30, sceneManager->serverCon.leaderboard[i].first, olc::WHITE);
+            engine->DrawString(engine->ScreenWidth() * 2 / 3, 10 * i + 30, to_string(sceneManager->serverCon.leaderboard[i].second), olc::WHITE);
         }
     }
 }
 
 void LeaderboardScene::Load() {
-    serverCon.FetchLeaderboard();
+    sceneManager->serverCon.FetchLeaderboard();
 
     //Fetch highscores from server here
 }

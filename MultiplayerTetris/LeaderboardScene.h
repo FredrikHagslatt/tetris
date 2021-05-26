@@ -1,11 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "SceneManager.h"
-#include "ServerConnectionEmscripten.h"
 
 class LeaderboardScene : public Scene{
-
-    ServerConnectionEmscripten serverCon;
 
     //Scene
     void Update(float fElapsedTime) override;
@@ -13,6 +10,4 @@ class LeaderboardScene : public Scene{
     void Load() override;
     void Unload() override;
     using Scene::Scene;
-
 };
-
