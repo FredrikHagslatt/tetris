@@ -37,7 +37,8 @@ void ServerConnectionEmscripten::FetchLeaderboard() {
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
     attr.onsuccess = downloadSucceeded;
     attr.onerror = downloadFailed;
-    emscripten_fetch(&attr, "info.json");
+//    emscripten_fetch(&attr, "info.json");
+    emscripten_fetch(&attr, "get_leaderboard.php");
     cout << "FetchLeaderboard " << globString << endl;
 #endif
 
