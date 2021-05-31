@@ -63,12 +63,17 @@ void SoloGameScene::Update(float fElapsedTime) {
 		player->Controller(fElapsedTime);
 
 		if (player->gameOver) { 
-			gameFinished = true;
-			if (sceneManager->data.bestSoloScore < player->deletedRows) {
-				sceneManager->data.bestSoloScore = player->deletedRows;
-				sceneManager->serverCon.PostHighscore(sceneManager->data.playerName, player->deletedRows);
-			}
-			if (gameTimer < 0.0f) {
+
+            sceneManager->serverCon.RefreshSoloScore(); 
+            oldScore = sceneManager->serverCon.soloScore;
+            
+            if (sceneManager->serverCon.soloScore < player->deletedRows) {
+                sceneManager->serverCon.soloScore = player->deletedRows;
+		        sceneManager->serverCon.PostHighscore(sceneManager->data.playerName, player->deletedRows);
+	        }
+
+            gameFinished = true;
+            if (gameTimer < 0.0f) {
 				gameTimer = 0.0f;
 			}
 		}
@@ -99,11 +104,13 @@ void SoloGameScene::RenderGraphics() {
 	}
 	else if (gameFinished) {
 		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Your Score: " + to_string(player->deletedRows));
-		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(sceneManager->data.bestSoloScore));
+		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(oldScore));
 
-		if (player->deletedRows > sceneManager->data.bestSoloScore)
+
+		if (player->deletedRows > sceneManager->serverCon.soloScore){
 			DrawBoxString(engine->ScreenHeight() / 2 + 10, "New Record!");
-	}
+        }
+    }
 }
 
 

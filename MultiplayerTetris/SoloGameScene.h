@@ -13,6 +13,7 @@ private:
 	float downAutoSpeed = 0.5f;
 	float speedIncreaseTimer = 0.0f;
 	float gameTimer = 180.f;
+    int oldScore = 0;
 
 	//Graphics
 	void DrawBoxString(int x, int y, string text, int scale, olc::Pixel textColor, olc::Pixel backColor);

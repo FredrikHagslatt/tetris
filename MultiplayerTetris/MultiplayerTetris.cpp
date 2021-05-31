@@ -16,7 +16,7 @@ bool MultiplayerTetris::OnUserCreate(){
 	sceneManager->AddScene(ONLINEGAME, new OnlineGameScene(this, sceneManager));
 //	sceneManager->AddScene(CREDITS, new GameScene(this, sceneManager));
 
-	sceneManager->ChangeScene(MENU);
+	sceneManager->ChangeScene(ENTERNAME);
 
 	return true;
 }

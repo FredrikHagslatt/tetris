@@ -25,9 +25,7 @@ void MenuScene::RenderGraphics() {
 }
 
 void MenuScene::Load() {
-
 }
 
 void MenuScene::Unload() {
-
 }

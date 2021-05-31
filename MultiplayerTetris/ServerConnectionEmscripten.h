@@ -14,10 +14,13 @@ class ServerConnectionEmscripten
 {
 public:
 
-	vector<pair<string, int>> leaderboard;
+    int soloScore;
+    vector<pair<string, int>> leaderboard;
 	vector<pair<string, int>> ParseLeaderboard(string sLeaderboard);
 	void FetchLeaderboard();
+	void FetchSoloScore(string playerName);
 	void PostHighscore(string playerName, int score);
 	void RefreshLeaderboard();
+	void RefreshSoloScore();
 	ServerConnectionEmscripten();
 };
