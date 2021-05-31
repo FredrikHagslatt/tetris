@@ -12,8 +12,6 @@ using namespace std;
 
 class ServerConnectionEmscripten
 {
-	string sLeaderboard = "FREPPAN,59;KARIN,35;RAJ,34;GANDALF,28";
-
 public:
 
 	vector<pair<string, int>> leaderboard;
