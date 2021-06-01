@@ -36,7 +36,7 @@ void EnterNameScene::Update(float fElapsedTime) {
 	}
 
 	if (engine->GetKey(olc::ENTER).bPressed && sceneManager->data.playerName.size() > 0) {
-		sceneManager->ChangeScene(MENU);
+        sceneManager->ChangeScene(MENU);
 	}
 
 }
@@ -52,6 +52,5 @@ void EnterNameScene::Load() {
 }
 
 void EnterNameScene::Unload() {
-
+    sceneManager->serverCon.FetchSoloScore(sceneManager->data.playerName);
 }
-

@@ -63,8 +63,17 @@ void SoloGameScene::Update(float fElapsedTime) {
 		player->Controller(fElapsedTime);
 
 		if (player->gameOver) { 
-			gameFinished = true;
-			if (gameTimer < 0.0f) {
+
+            sceneManager->serverCon.RefreshSoloScore(); 
+            oldScore = sceneManager->serverCon.soloScore;
+            
+            if (sceneManager->serverCon.soloScore < player->deletedRows) {
+                sceneManager->serverCon.soloScore = player->deletedRows;
+		        sceneManager->serverCon.PostHighscore(sceneManager->data.playerName, player->deletedRows);
+	        }
+
+            gameFinished = true;
+            if (gameTimer < 0.0f) {
 				gameTimer = 0.0f;
 			}
 		}
@@ -95,16 +104,19 @@ void SoloGameScene::RenderGraphics() {
 	}
 	else if (gameFinished) {
 		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Your Score: " + to_string(player->deletedRows));
-		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(sceneManager->data.bestSoloScore));
+		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(oldScore));
 
-		if (player->deletedRows > sceneManager->data.bestSoloScore)
+
+		if (player->deletedRows > oldScore){
 			DrawBoxString(engine->ScreenHeight() / 2 + 10, "New Record!");
-	}
+        }
+    }
 }
 
 
 void SoloGameScene::Load() {
-	player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
+    sceneManager->serverCon.FetchSoloScore(sceneManager->data.playerName);
+    player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
 
 	gameStarted = false;
 	gameFinished = false;
@@ -123,4 +135,3 @@ void SoloGameScene::Load() {
 void SoloGameScene::Unload() {
 	delete player;
 }
-
