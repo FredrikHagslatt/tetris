@@ -107,7 +107,7 @@ void SoloGameScene::RenderGraphics() {
 		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(oldScore));
 
 
-		if (player->deletedRows > sceneManager->serverCon.soloScore){
+		if (player->deletedRows > oldScore){
 			DrawBoxString(engine->ScreenHeight() / 2 + 10, "New Record!");
         }
     }
@@ -115,7 +115,8 @@ void SoloGameScene::RenderGraphics() {
 
 
 void SoloGameScene::Load() {
-	player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
+    sceneManager->serverCon.FetchSoloScore(sceneManager->data.playerName);
+    player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
 
 	gameStarted = false;
 	gameFinished = false;
@@ -134,4 +135,3 @@ void SoloGameScene::Load() {
 void SoloGameScene::Unload() {
 	delete player;
 }
-

@@ -54,7 +54,7 @@ void ServerConnectionEmscripten::FetchLeaderboard() {
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
     attr.onsuccess = FetchLeaderboardSucceeded;
     attr.onerror = FetchLeaderboardFailed;
-    emscripten_fetch(&attr, "get_leaderboard.php");
+    emscripten_fetch(&attr, "backend/get_leaderboard.php");
 }
 
 
@@ -75,7 +75,7 @@ void ServerConnectionEmscripten::FetchSoloScore(string playerName) {
 
     attr.requestData = data;
     attr.requestDataSize = strlen(attr.requestData);
-    emscripten_fetch(&attr, "fetch_solo_score.php");
+    emscripten_fetch(&attr, "backend/fetch_solo_score.php");
 }
 
 
@@ -98,7 +98,7 @@ void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
 
     attr.requestData = data;
     attr.requestDataSize = strlen(attr.requestData);
-    emscripten_fetch(&attr, "save_singleplayer_record.php");
+    emscripten_fetch(&attr, "backend/save_singleplayer_record.php");
 }
 
 #else
