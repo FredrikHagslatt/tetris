@@ -143,7 +143,7 @@ void SplitScreenGameScene::RenderGraphics() {
 
 	if (!gameStarted) {
 		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete multiple rows simultaneously to add rows to your opponent");
-		DrawBoxString(engine->ScreenHeight() / 2, "Stay in the game longer than your opponent to win");
+		DrawBoxString(engine->ScreenHeight() / 2, "The last player remaining wins the game");
 		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Press ENTER to start the game");
 	}
 	else if (gameFinished) {
