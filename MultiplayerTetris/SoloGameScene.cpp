@@ -87,17 +87,33 @@ void SoloGameScene::RenderGraphics() {
 	player->DrawGrid();
 	player->DrawTetromino();
 
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 5, "Deleted rows", olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, to_string(player->deletedRows), olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 65, "Seconds: ", olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 85, to_string(gameTimer), olc::WHITE, 2);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Deleted rows", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, to_string(player->deletedRows), olc::WHITE, 1);
 
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 5, "<- Left", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 20, "-> Right", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 35, "v Soft drop", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 50, "Space Hard drop", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 65, "^ Rotate clockwise", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 80, "Z Rotate counter clockwise", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 45, "Seconds: ", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 55, to_string(gameTimer), olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 15, "Controls:",	olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 35, "Left Arrow:",	olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 45, "Move Left",	olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 65, "Right Arrow:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 75, "Move Right",	olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 95, "Down Arrow:",	olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 105, "Soft Drop",	olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 125, "Up Arrow:",	olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 135, "Rotate",		olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 145, "clockwise",	olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 165, "Z:",			olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 175, "Rotate",		olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 185, "counter",		olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 195, "clockwise",	olc::WHITE, 1);
+
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 215, "Spacebar:",	olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 225, "Hard Drop",	olc::WHITE, 1);
 
 	if (!gameStarted) {
 		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete as many rows as possible before the time runs out");
