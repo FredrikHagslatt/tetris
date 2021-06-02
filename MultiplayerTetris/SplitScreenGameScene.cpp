@@ -142,7 +142,9 @@ void SplitScreenGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 180, "Hard Drop", olc::WHITE, 1);
 
 	if (!gameStarted) {
-		DrawBoxString(engine->ScreenHeight() / 2, "Press ENTER to start the game");
+		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete multiple rows simultaneously to add rows to your opponent");
+		DrawBoxString(engine->ScreenHeight() / 2, "Stay in the game longer than your opponent to win");
+		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Press ENTER to start the game");
 	}
 	else if (gameFinished) {
 		if (player1->gameOver && player2->gameOver) {

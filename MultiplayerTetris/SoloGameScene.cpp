@@ -100,6 +100,7 @@ void SoloGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 10 + 80, "Z Rotate counter clockwise", olc::WHITE, 1);
 
 	if (!gameStarted) {
+		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete as many rows as possible before the time runs out");
 		DrawBoxString(engine->ScreenHeight() / 2, "Press ENTER to start the game");
 	}
 	else if (gameFinished) {
