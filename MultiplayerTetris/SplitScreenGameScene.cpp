@@ -63,15 +63,17 @@ void SplitScreenGameScene::SendRows(TetrisPlayer* sender, TetrisPlayer* recipien
 void SplitScreenGameScene::Update(float fElapsedTime) {
 
 	if (!gameStarted) {
-		if (engine->GetKey(olc::ENTER).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed) {
 			gameStarted = true;
+		}
 		else if (engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
 		}
 	}
 	else if (gameFinished) {
-		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
+		}
 	}
 	else { //Game running
 		timePlayed += fElapsedTime;

@@ -38,21 +38,24 @@ void SoloGameScene::InitiateTetrominoes() {
 
 void SoloGameScene::Update(float fElapsedTime) {
 	if (!gameStarted) {
-		if (engine->GetKey(olc::ENTER).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed) {
 			gameStarted = true;
+		}
 		else if (engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
 		}
 	}
 	else if (gameFinished) {
-		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
+		}
 	}
 	else {
 
 		gameTimer -= fElapsedTime;
-		if (gameTimer <= 0)
+		if (gameTimer <= 0) {
 			player->gameOver = true;
+		}
 
 		speedIncreaseTimer += fElapsedTime;
 		if (speedIncreaseTimer > 90.0f && downAutoSpeed > 0.3f) {
