@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SERVER_CONNECTION_EMSCRIPTEN_H
+#define SERVER_CONNECTION_EMSCRIPTEN_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,3 +26,4 @@ public:
 	void RefreshSoloScore();
 	ServerConnectionEmscripten();
 };
+#endif

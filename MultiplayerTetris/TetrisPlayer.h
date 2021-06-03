@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TETRIS_PLAYER_H
+#define TETRIS_PLAYER_H
+
 #include "Constants.h"
 #include "olcPixelGameEngine.h"
 #include "Tetrominoes.h"
@@ -83,4 +85,4 @@ public:
 	TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xCenter);
 
 };
-
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 #define gridWidth 10
 #define gridHeight 20
@@ -14,3 +15,4 @@
 #define CREDITS 8
 
 #define SCENES 9
+#endif

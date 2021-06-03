@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SOLO_GAME_SCENE_H
+#define SOLO_GAME_SCENE_H
+
 #include "Scene.h"
 #include "Tetrominoes.h"
 #include "TetrisPlayer.h"
@@ -31,4 +33,4 @@ private:
 	void Unload() override;
 	using Scene::Scene;
 };
-
+#endif

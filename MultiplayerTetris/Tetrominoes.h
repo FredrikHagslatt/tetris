@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TETROMINOES_H
+#define TETROMINOES_H
+
 #include "olcPixelGameEngine.h"
 
 using namespace std;
@@ -34,3 +36,4 @@ extern Tetromino Z;
 extern Tetromino J;
 extern Tetromino L;
 extern Tetromino tetrominoTypes[7];
+#endif

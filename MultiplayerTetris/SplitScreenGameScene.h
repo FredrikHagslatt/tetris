@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPLIT_SCREEN_GAME_SCENE_H
+#define SPLIT_SCREEN_GAME_SCENE_H
 #include "Scene.h"
 #include "Tetrominoes.h"
 #include "TetrisPlayer.h"
@@ -36,4 +37,4 @@ public:
 	using Scene::Scene;
 
 };
-
+#endif
