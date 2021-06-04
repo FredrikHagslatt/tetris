@@ -21,7 +21,7 @@ void FetchLeaderboardFailed(emscripten_fetch_t* fetch) {
 
 
 void FetchSoloScoreSucceeded(emscripten_fetch_t *fetch) {
-    string sSoloScore = "";
+    std::string sSoloScore = "";
     for (int i = 0; i < fetch->numBytes; i++){
         sSoloScore += fetch->data[i];
     }
@@ -58,7 +58,7 @@ void ServerConnectionEmscripten::FetchLeaderboard() {
 }
 
 
-void ServerConnectionEmscripten::FetchSoloScore(string playerName) {
+void ServerConnectionEmscripten::FetchSoloScore(std::string playerName) {
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     strcpy(attr.requestMethod, "POST");
@@ -79,7 +79,7 @@ void ServerConnectionEmscripten::FetchSoloScore(string playerName) {
 }
 
 
-void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
+void ServerConnectionEmscripten::PostHighscore(std::string playerName, int score) {
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
     strcpy(attr.requestMethod, "POST");
@@ -94,7 +94,7 @@ void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
     strcpy(data, "playerName=");
     strcat(data, playerName.c_str());
     strcat(data, "&score=");
-    strcat(data, to_string(score).c_str());
+    strcat(data, std::to_string(score).c_str());
 
     attr.requestData = data;
     attr.requestDataSize = strlen(attr.requestData);
