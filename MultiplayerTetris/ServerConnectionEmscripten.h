@@ -10,18 +10,16 @@
 #include <emscripten/fetch.h>
 #endif
 
-using namespace std;
-
 class ServerConnectionEmscripten
 {
 public:
 
     int soloScore;
-    vector<pair<string, int>> leaderboard;
-	vector<pair<string, int>> ParseLeaderboard(string sLeaderboard);
+	std::vector<std::pair<std::string, int>> leaderboard;
+	std::vector<std::pair<std::string, int>> ParseLeaderboard(std::string sLeaderboard);
 	void FetchLeaderboard();
-	void FetchSoloScore(string playerName);
-	void PostHighscore(string playerName, int score);
+	void FetchSoloScore(std::string playerName);
+	void PostHighscore(std::string playerName, int score);
 	void RefreshLeaderboard();
 	void RefreshSoloScore();
 	ServerConnectionEmscripten();

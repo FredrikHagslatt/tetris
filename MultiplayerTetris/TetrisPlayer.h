@@ -7,16 +7,15 @@
 #include <algorithm>
 #include <random>
 
-using namespace std;
 
 class TetrisPlayer{
 
 private:
 
-	default_random_engine rng = default_random_engine{ random_device{}() };
+	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 
 	olc::PixelGameEngine* engine;
-	string playerName = "";
+	std::string playerName = "";
 
 	int grid[gridWidth * gridHeight] = { 0 };
 	float downAutoTimer = 0.0f;
@@ -71,7 +70,7 @@ public:
 	olc::Key buttonRotateCounterClockwise = olc::Z;
 
 
-	list<Tetromino*> tetrominoes; //Assigned by GameScene for sync in multiplayer
+	std::list<Tetromino*> tetrominoes; //Assigned by GameScene for sync in multiplayer
 	Tetromino* activeTetromino = nullptr;
 
 	void SetDownAutoSpeed(float _downAutoSpeed);

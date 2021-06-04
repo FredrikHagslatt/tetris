@@ -3,8 +3,6 @@
 
 #include "olcPixelGameEngine.h"
 
-using namespace std;
-
 struct Tetromino {
 	int color;
 	int rotations;

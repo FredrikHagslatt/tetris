@@ -126,7 +126,7 @@ void TetrisPlayer::AddRows(int rows) {
 			grid[j] = ncolor;
 		}
 
-		vector<int> indexes;
+		std::vector<int> indexes;
 		for (int j = 0; j < gridWidth; j++)
 			indexes.push_back(j);
 

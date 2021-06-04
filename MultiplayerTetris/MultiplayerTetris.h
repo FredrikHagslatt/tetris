@@ -13,8 +13,6 @@
 //#include "SplitScreenScoreScreenScene.h"
 //#include "CreditsScene.h"
 
-using namespace std;
-
 class MultiplayerTetris : public olc::PixelGameEngine {
 public:
 	SceneManager* sceneManager;

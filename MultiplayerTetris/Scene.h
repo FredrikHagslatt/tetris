@@ -3,7 +3,6 @@
 
 #include "olcPixelGameEngine.h"
 #include <string>
-using namespace std;
 
 class SceneManager;
 

@@ -7,7 +7,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
 
 class SceneManager{
 private:
@@ -17,7 +16,7 @@ private:
 public:
 	ServerConnectionEmscripten serverCon;
 	struct dataStruct {
-		string playerName = "";
+		std::string playerName = "";
 		int bestSoloScore = 0;
 	} data;
 

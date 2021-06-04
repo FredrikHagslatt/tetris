@@ -18,8 +18,8 @@ private:
     int oldScore = 0;
 
 	//Graphics
-	void DrawBoxString(int x, int y, string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
-	void DrawBoxString(int y, string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
+	void DrawBoxString(int x, int y, std::string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
+	void DrawBoxString(int y, std::string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
 	int GetX(int index);
 	int GetY(int index);
 
