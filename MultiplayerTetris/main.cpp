@@ -5,7 +5,8 @@
 int main()
 {
 	MultiplayerTetris multiplayerTetris;
-	if (multiplayerTetris.Construct(640, 360, 2, 2))
+	if (multiplayerTetris.Construct(640, 360, 2, 2) == olc::OK) {
 		multiplayerTetris.Start();
+	}
 	return 0;
 }

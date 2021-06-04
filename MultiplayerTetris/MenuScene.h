@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MENU_SCENE_H
+#define MENU_SCENE_H
+
 #include "Scene.h"
 class MenuScene : public Scene{
 
@@ -13,4 +15,4 @@ class MenuScene : public Scene{
 	using Scene::Scene;
 
 };
-
+#endif

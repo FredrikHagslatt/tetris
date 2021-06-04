@@ -1,8 +1,9 @@
 #include "SceneManager.h"
 
 void SceneManager::ChangeScene(int index) {
-	if (currentScene)
+	if (currentScene) {
 		currentScene->Unload();
+	}
 	currentScene = scenes[index];
 	currentScene->Load();
 }

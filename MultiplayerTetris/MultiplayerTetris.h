@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MULTIPLAYER_TETRIS_H
+#define MULTIPLAYER_TETRIS_H
 
 #include "olcPixelGameEngine.h"
 #include "SceneManager.h"
@@ -12,9 +13,6 @@
 //#include "SplitScreenScoreScreenScene.h"
 //#include "CreditsScene.h"
 
-using namespace std;
-
-
 class MultiplayerTetris : public olc::PixelGameEngine {
 public:
 	SceneManager* sceneManager;
@@ -23,3 +21,4 @@ public:
 	bool OnUserCreate() override;
 	bool OnUserUpdate(float fElapsedTime) override;
 };
+#endif

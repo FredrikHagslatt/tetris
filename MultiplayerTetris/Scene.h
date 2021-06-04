@@ -1,12 +1,12 @@
-#pragma once
+#ifndef SCENE_H
+#define SCENE_H
+
 #include "olcPixelGameEngine.h"
 #include <string>
-using namespace std;
 
 class SceneManager;
 
 class Scene{
-
 public:
 	SceneManager* sceneManager;
 	olc::PixelGameEngine* engine;
@@ -17,3 +17,4 @@ public:
 	void Cycle(float fElapsedTime);
 	Scene(olc::PixelGameEngine* _engine, SceneManager* _sceneManager);
 };
+#endif

@@ -1,6 +1,6 @@
 #include "ServerConnectionEmscripten.h"
 
-string sLeaderboard = "FREPPAN,59;KARIN,35;RAJ,34;GANDALF,28";
+std::string sLeaderboard = "FREPPAN,59;KARIN,35;RAJ,34;GANDALF,28";
 int iSoloScore = 0;
 ServerConnectionEmscripten::ServerConnectionEmscripten() { FetchLeaderboard(); }
 
@@ -103,8 +103,8 @@ void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {
 
 #else
 void ServerConnectionEmscripten::FetchLeaderboard() {}
-void ServerConnectionEmscripten::FetchSoloScore(string playerName) {}
-void ServerConnectionEmscripten::PostHighscore(string playerName, int score) {}
+void ServerConnectionEmscripten::FetchSoloScore(std::string playerName) {}
+void ServerConnectionEmscripten::PostHighscore(std::string playerName, int score) {}
 #endif
 
 
@@ -116,23 +116,23 @@ void ServerConnectionEmscripten::RefreshSoloScore() {
     soloScore = iSoloScore;
 }
 
-vector<pair<string, int>> ServerConnectionEmscripten::ParseLeaderboard(string sLeaderboard) {
-    stringstream ssLeaderboard(sLeaderboard);
-    vector<string> leaderboardSections;
-    vector<pair<string, int>> vLeaderboard;
+std::vector<std::pair<std::string, int>> ServerConnectionEmscripten::ParseLeaderboard(std::string sLeaderboard) {
+    std::stringstream ssLeaderboard(sLeaderboard);
+    std::vector<std::string> leaderboardSections;
+    std::vector<std::pair<std::string, int>> vLeaderboard;
 
     while (ssLeaderboard.good()) {
-        string substr;
-        getline(ssLeaderboard, substr, ';');
+        std::string substr;
+        std::getline(ssLeaderboard, substr, ';');
         leaderboardSections.push_back(substr);
     }
 
     for (int i = 0; i < size(leaderboardSections); i++) {
-        stringstream section(leaderboardSections[i]);
-        string name;
-        string num;
-        getline(section, name, ',');
-        getline(section, num, ',');
+        std::stringstream section(leaderboardSections[i]);
+        std::string name;
+        std::string num;
+        std::getline(section, name, ',');
+        std::getline(section, num, ',');
         vLeaderboard.push_back({ name, stoi(num) });
     }
     return vLeaderboard;

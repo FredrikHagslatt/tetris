@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SOLO_GAME_SCENE_H
+#define SOLO_GAME_SCENE_H
+
 #include "Scene.h"
 #include "Tetrominoes.h"
 #include "TetrisPlayer.h"
@@ -16,8 +18,8 @@ private:
     int oldScore = 0;
 
 	//Graphics
-	void DrawBoxString(int x, int y, string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
-	void DrawBoxString(int y, string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
+	void DrawBoxString(int x, int y, std::string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
+	void DrawBoxString(int y, std::string text, int scale, olc::Pixel textColor, olc::Pixel backColor);
 	int GetX(int index);
 	int GetY(int index);
 
@@ -31,4 +33,4 @@ private:
 	void Unload() override;
 	using Scene::Scene;
 };
-
+#endif

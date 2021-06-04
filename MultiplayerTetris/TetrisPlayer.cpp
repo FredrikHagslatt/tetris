@@ -110,8 +110,9 @@ void TetrisPlayer::WriteTetrominoToGrid() {
 
 
 void TetrisPlayer::AddRows(int rows) {
-	if (rows == 0)
+	if (rows == 0) {
 		return;
+	}
 
 	//Move grid up
 	for (int i = 0; i < gridWidth * gridHeight - rows * gridWidth; i++) {
@@ -125,7 +126,7 @@ void TetrisPlayer::AddRows(int rows) {
 			grid[j] = ncolor;
 		}
 
-		vector<int> indexes;
+		std::vector<int> indexes;
 		for (int j = 0; j < gridWidth; j++)
 			indexes.push_back(j);
 
@@ -156,16 +157,12 @@ void TetrisPlayer::SpawnNewTetromino() {
 
 
 void TetrisPlayer::MoveLeft() {
-	if (!CheckCollisionLeft()) {
-		xPos--;
-	}
+	if (!CheckCollisionLeft()) { xPos--; }
 }
 
 
 void TetrisPlayer::MoveRight() {
-	if (!CheckCollisionRight()) {
-		xPos++;
-	}
+	if (!CheckCollisionRight()) { xPos++; }
 }
 
 
@@ -216,8 +213,7 @@ void TetrisPlayer::RotateCounterClockwise() {
 
 
 void TetrisPlayer::HardDrop() {
-	if (MoveDown(false))
-		HardDrop();
+	if (MoveDown(false)) { HardDrop(); }
 }
 
 

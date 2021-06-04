@@ -1,7 +1,7 @@
-#pragma once
-#include "olcPixelGameEngine.h"
+#ifndef TETROMINOES_H
+#define TETROMINOES_H
 
-using namespace std;
+#include "olcPixelGameEngine.h"
 
 struct Tetromino {
 	int color;
@@ -34,3 +34,4 @@ extern Tetromino Z;
 extern Tetromino J;
 extern Tetromino L;
 extern Tetromino tetrominoTypes[7];
+#endif

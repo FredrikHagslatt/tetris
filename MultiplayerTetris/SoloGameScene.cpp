@@ -5,14 +5,14 @@ int SoloGameScene::GetX(int index) { return index % 10; }
 int SoloGameScene::GetY(int index) { return int(index / 10); }
 
 
-void SoloGameScene::DrawBoxString(int x, int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+void SoloGameScene::DrawBoxString(int x, int y, std::string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
 	olc::vi2d textSize = engine->GetTextSize(text) * scale;
 	engine->FillRect(x - 2, y - 2, textSize.x + 3, textSize.y + 3, backColor);
 	engine->DrawString(x, y, text, textColor, scale);
 }
 
 
-void SoloGameScene::DrawBoxString(int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+void SoloGameScene::DrawBoxString(int y, std::string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
 	int x = (engine->ScreenWidth() - engine->GetTextSize(text).x * scale) / 2;
 	DrawBoxString(x, y, text, scale, textColor, backColor);
 }
@@ -24,7 +24,7 @@ void SoloGameScene::InitiateTetrominoes() {
 	//Make list of tetrominoes to sync between all players in multiplayer
 
 	for (int i = 0; i < 30; i++) {
-		vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
 //			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
 		while (tetrominoVec.size()) {
@@ -38,21 +38,24 @@ void SoloGameScene::InitiateTetrominoes() {
 
 void SoloGameScene::Update(float fElapsedTime) {
 	if (!gameStarted) {
-		if (engine->GetKey(olc::ENTER).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed) {
 			gameStarted = true;
+		}
 		else if (engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
 		}
 	}
 	else if (gameFinished) {
-		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
+		}
 	}
 	else {
 
 		gameTimer -= fElapsedTime;
-		if (gameTimer <= 0)
+		if (gameTimer <= 0) {
 			player->gameOver = true;
+		}
 
 		speedIncreaseTimer += fElapsedTime;
 		if (speedIncreaseTimer > 90.0f && downAutoSpeed > 0.3f) {
@@ -88,10 +91,10 @@ void SoloGameScene::RenderGraphics() {
 	player->DrawTetromino();
 
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Deleted rows", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, to_string(player->deletedRows), olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, std::to_string(player->deletedRows), olc::WHITE, 1);
 
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 45, "Seconds: ", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 55, to_string(gameTimer), olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 55, std::to_string(gameTimer), olc::WHITE, 1);
 
 	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 15, "Controls:",	olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 35, "Left Arrow:",	olc::WHITE, 1);
@@ -120,8 +123,8 @@ void SoloGameScene::RenderGraphics() {
 		DrawBoxString(engine->ScreenHeight() / 2, "Press ENTER to start the game");
 	}
 	else if (gameFinished) {
-		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Your Score: " + to_string(player->deletedRows));
-		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + to_string(oldScore));
+		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Your Score: " + std::to_string(player->deletedRows));
+		DrawBoxString(engine->ScreenHeight() / 2, "Your Best Score: " + std::to_string(oldScore));
 
 
 		if (player->deletedRows > oldScore){

@@ -6,14 +6,14 @@ int SplitScreenGameScene::GetX(int index) { return index % 10; }
 int SplitScreenGameScene::GetY(int index) { return int(index / 10); }
 
 
-void SplitScreenGameScene::DrawBoxString(int x, int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+void SplitScreenGameScene::DrawBoxString(int x, int y, std::string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
 	olc::vi2d textSize = engine->GetTextSize(text) * scale;
 	engine->FillRect(x - 2, y - 2, textSize.x + 3, textSize.y + 3, backColor);
 	engine->DrawString(x, y, text, textColor, scale);
 }
 
 
-void SplitScreenGameScene::DrawBoxString(int y, string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
+void SplitScreenGameScene::DrawBoxString(int y, std::string text, int scale = 1, olc::Pixel textColor = olc::WHITE, olc::Pixel backColor = olc::BLACK) {
 	int x = (engine->ScreenWidth() - engine->GetTextSize(text).x * scale) / 2;
 	DrawBoxString(x, y, text, scale, textColor, backColor);
 }
@@ -31,7 +31,7 @@ void SplitScreenGameScene::InitiateTetrominoes() {
 
 	for (int i = 0; i < 30; i++) {
 
-		vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
 //			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
 		while (tetrominoVec.size()) {
@@ -63,15 +63,17 @@ void SplitScreenGameScene::SendRows(TetrisPlayer* sender, TetrisPlayer* recipien
 void SplitScreenGameScene::Update(float fElapsedTime) {
 
 	if (!gameStarted) {
-		if (engine->GetKey(olc::ENTER).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed) {
 			gameStarted = true;
+		}
 		else if (engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
 		}
 	}
 	else if (gameFinished) {
-		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed)
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
+		}
 	}
 	else { //Game running
 		timePlayed += fElapsedTime;
@@ -156,16 +158,16 @@ void SplitScreenGameScene::RenderGraphics() {
 		else {
 			DrawBoxString(engine->ScreenHeight() / 3, "Player 1 is the winner!", 2);
 		}
-		DrawBoxString(engine->ScreenHeight() / 2 - 20, "Time played: " + to_string((int)timePlayed) + " seconds");
+		DrawBoxString(engine->ScreenHeight() / 2 - 20, "Time played: " + std::to_string((int)timePlayed) + " seconds");
 		DrawBoxString(engine->ScreenHeight() / 2, "Player:          1           2");
 		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Deleted Rows:    " 
-			+ to_string(player1->deletedRows) 
+			+ std::to_string(player1->deletedRows)
 			+ "           " 
-			+ to_string(player2->deletedRows));
+			+ std::to_string(player2->deletedRows));
 		DrawBoxString(engine->ScreenHeight() / 2 + 20, "Sent Rows:       " 
-			+ to_string(player1->sentRows) 
+			+ std::to_string(player1->sentRows)
 			+ "           " 
-			+ to_string(player2->sentRows));
+			+ std::to_string(player2->sentRows));
 	}
 }
 

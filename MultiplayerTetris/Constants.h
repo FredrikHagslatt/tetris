@@ -1,16 +1,22 @@
-#pragma once
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
-#define gridWidth 10
-#define gridHeight 20
+inline constexpr unsigned short gridWidth{ 10 };
+inline constexpr unsigned short gridHeight{ 20 };
 
-#define MENU 0
-#define ENTERNAME 1
-#define LEADERBOARD 2
-#define SOLOSCORESCREEN 3
-#define SPLITSCREENSCORESCREEN 4
-#define SOLOGAME 5
-#define SPLITSCREENGAME 6
-#define ONLINEGAME 7
-#define CREDITS 8
+inline constexpr unsigned short MENU{ 0 };
+inline constexpr unsigned short ENTERNAME{ 1 };
+inline constexpr unsigned short LEADERBOARD{ 2 };
+inline constexpr unsigned short SOLOSCORESCREEN{ 3 };
+inline constexpr unsigned short SPLITSCREENSCORESCREEN{ 4 };
+inline constexpr unsigned short SOLOGAME{ 5 };
+inline constexpr unsigned short SPLITSCREENGAME{ 6 };
+inline constexpr unsigned short ONLINEGAME{ 7 };
+inline constexpr unsigned short CREDITS{ 8 };
 
-#define SCENES 9
+inline constexpr unsigned short SCENES{ 9 };
+
+
+#endif
+
+
