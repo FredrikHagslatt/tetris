@@ -71,7 +71,7 @@ void SplitScreenGameScene::Update(float fElapsedTime) {
 		}
 	}
 	else if (gameFinished) {
-		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::SPACE).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
+		if (engine->GetKey(olc::ENTER).bPressed || engine->GetKey(olc::ESCAPE).bPressed) {
 			sceneManager->ChangeScene(MENU);
 		}
 	}
