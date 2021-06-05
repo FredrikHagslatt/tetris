@@ -22,24 +22,16 @@ void SplitScreenGameScene::DrawBoxString(int y, std::string text, int scale = 1,
 void SplitScreenGameScene::InitiateTetrominoes() {
 	player1->tetrominoes.clear();
 	player2->tetrominoes.clear();
-
-	Tetromino* newTetromino = &tetrominoTypes[rand() % 7];
-	player1->activeTetromino = newTetromino;
-	player2->activeTetromino = newTetromino;
 	
 	//Make list of tetrominoes to sync between all players in multiplayer
+	std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+//		vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
+	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 	for (int i = 0; i < 30; i++) {
-
-		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
-//			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
-
-		while (tetrominoVec.size()) {
-			int index = rand() % tetrominoVec.size();
-			player1->tetrominoes.push_back(tetrominoVec[index]);
-			player2->tetrominoes.push_back(tetrominoVec[index]);
-			tetrominoVec.erase(tetrominoVec.begin() + index);
-		}
+		shuffle(begin(tetrominoVec), end(tetrominoVec), rng);
+		player1->tetrominoes.insert(player1->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
+		player2->tetrominoes.insert(player2->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
 	}
 }
 

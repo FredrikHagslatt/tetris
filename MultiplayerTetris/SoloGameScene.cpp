@@ -20,18 +20,15 @@ void SoloGameScene::DrawBoxString(int y, std::string text, int scale = 1, olc::P
 
 void SoloGameScene::InitiateTetrominoes() {
 	player->tetrominoes.clear();
-	player->activeTetromino = &tetrominoTypes[rand() % 7];
+
 	//Make list of tetrominoes to sync between all players in multiplayer
+	std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+//		vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
+	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 	for (int i = 0; i < 30; i++) {
-		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
-//			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
-
-		while (tetrominoVec.size()) {
-			int index = rand() % tetrominoVec.size();
-			player->tetrominoes.push_back(tetrominoVec[index]);
-			tetrominoVec.erase(tetrominoVec.begin() + index);
-		}
+		shuffle(begin(tetrominoVec), end(tetrominoVec), rng);
+		player->tetrominoes.insert(player->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
 	}
 }
 
