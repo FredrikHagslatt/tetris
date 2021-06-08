@@ -3,7 +3,6 @@
 int TetrisPlayer::GetX(int index) { return index % 10; }
 int TetrisPlayer::GetY(int index) { return int(index / 10); }
 int TetrisPlayer::GetIndex(int x, int y) { return x + gridWidth * y; }
-void TetrisPlayer::SetDownAutoSpeed(float _downAutoSpeed) { downAutoSpeed = _downAutoSpeed; }
 
 
 bool TetrisPlayer::CheckCollisionRotation(int nextRotation) {
@@ -140,13 +139,19 @@ void TetrisPlayer::AddRows(int rows) {
 	}
 }
 
+
 void TetrisPlayer::SpawnNewTetromino() {
 	xPos = int(gridWidth / 2 - 2);
 	yPos = -4;
 	rotation = 0;
+
+	if (activeTetromino != nullptr) {
+		tetrominoes.push_back(tetrominoes.front());
+		tetrominoes.pop_front();
+	}
+
 	activeTetromino = tetrominoes.front();
-	tetrominoes.pop_front();
-	tetrominoes.push_back(activeTetromino);
+	nextTetromino = *std::next(tetrominoes.begin(), 1);
 	while (yPos) {
 		if (!MoveDown(true)) {
 			gameOver = true;
@@ -276,7 +281,27 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 }
 
 
-void TetrisPlayer::DrawTetromino() {
+void TetrisPlayer::DrawTetromino(int x, int y, Tetromino* tetromino) {
+	for (int i = 0; i < 16; i++) {
+		if (nextTetromino->shape[i]) {
+			engine->FillRect(x + edge + section * tetromino->XOffset(i, 0),
+				y + edge + section * tetromino->YOffset(i, 0),
+				tile,
+				tile,
+				colors[tetromino->color]);
+		}
+		else {
+			engine->FillRect(x + edge + section * tetromino->XOffset(i, 0),
+				y + edge + section * tetromino->YOffset(i, 0),
+				tile,
+				tile,
+				colors[0]);
+		}
+	}
+}
+
+
+void TetrisPlayer::DrawActiveTetromino() {
 	for (int i = 0; i < 16; i++) {
 		if (activeTetromino->shape[i]) {
 			engine->FillRect(xStart + edge + section * (xPos + activeTetromino->XOffset(i, rotation)),
@@ -297,16 +322,24 @@ void TetrisPlayer::DrawGrid() {
 			tile,
 			colors[grid[i]]);
 	}
+	if (showNextTetrominoPanel) {
+		DrawTetromino(xPanel, yPanel, nextTetromino);
+	}
 }
 
 
-TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xCenter) {
+void TetrisPlayer::ActivateNextTetrominoPanel(int xCenter, int y) {
+	xPanel = xCenter - section * gridWidth / 2;
+	yPanel = y;
+	showNextTetrominoPanel = true;
+}
+
+
+TetrisPlayer::TetrisPlayer(olc::PixelGameEngine* _engine, int xCenter, int _yStart, int yEnd) {
 	engine = _engine;
 	yStart = _yStart;
-	yEnd = _yEnd;
 	section = (yEnd - yStart) / gridHeight;
-	xStart = _xCenter - section * gridWidth / 2;
-	xEnd = _xCenter + section * gridWidth / 2;
+	xStart = xCenter - section * gridWidth / 2;
 
 	edge = section * 1 / 20;
 	tile = section * 19 / 20;

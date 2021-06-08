@@ -85,7 +85,7 @@ void SoloGameScene::RenderGraphics() {
 	engine->Clear(olc::DARK_BLUE);
 
 	player->DrawGrid();
-	player->DrawTetromino();
+	player->DrawActiveTetromino();
 
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Deleted rows", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, std::to_string(player->deletedRows), olc::WHITE, 1);
@@ -133,7 +133,8 @@ void SoloGameScene::RenderGraphics() {
 
 void SoloGameScene::Load() {
     sceneManager->serverCon.FetchSoloScore(sceneManager->data.playerName);
-    player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
+    player = new TetrisPlayer(engine, engine->ScreenWidth() / 2, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
+	player->ActivateNextTetrominoPanel(engine->ScreenWidth() * 3 / 4, engine->ScreenHeight() / 3);
 
 	gameStarted = false;
 	gameFinished = false;

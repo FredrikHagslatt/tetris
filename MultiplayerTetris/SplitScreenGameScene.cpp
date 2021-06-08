@@ -74,8 +74,8 @@ void SplitScreenGameScene::Update(float fElapsedTime) {
 		if (speedIncreaseTimer > 180.0f && downAutoSpeed > 0.3f) {
 			speedIncreaseTimer = 0.0f;
 			downAutoSpeed -= 0.1f;
-			player1->SetDownAutoSpeed(downAutoSpeed);
-			player2->SetDownAutoSpeed(downAutoSpeed);
+			player1->downAutoSpeed = downAutoSpeed;
+			player2->downAutoSpeed = downAutoSpeed;
 		}
 		player1->Controller(fElapsedTime);
 		player2->Controller(fElapsedTime);
@@ -96,8 +96,8 @@ void SplitScreenGameScene::RenderGraphics() {
 	player1->DrawGrid();
 	player2->DrawGrid();
 
-	player1->DrawTetromino();
-	player2->DrawTetromino();
+	player1->DrawActiveTetromino();
+	player2->DrawActiveTetromino();
 
 	//player1 controls
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 - 5,  "Controls:", olc::WHITE, 1);
@@ -168,8 +168,8 @@ void SplitScreenGameScene::Load() {
 	gameStarted = false;
 	gameFinished = false;
 
-	player1 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 7 / 20);
-	player2 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 13 / 20);
+	player1 = new TetrisPlayer(engine, engine->ScreenWidth() * 7 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
+	player2 = new TetrisPlayer(engine, engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
 
 	downAutoSpeed = 0.5f;
 	speedIncreaseTimer = 0.0f;
