@@ -4,7 +4,7 @@
 #include "olcPixelGameEngine.h"
 
 struct Tetromino {
-	int color;
+	int color; //Doubles as ID
 	int rotations;
 	int shape[4 * 4] { 0 };
 	int XOffset(int index, int rotation) { 

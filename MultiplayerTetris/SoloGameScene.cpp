@@ -20,18 +20,15 @@ void SoloGameScene::DrawBoxString(int y, std::string text, int scale = 1, olc::P
 
 void SoloGameScene::InitiateTetrominoes() {
 	player->tetrominoes.clear();
-	player->activeTetromino = &tetrominoTypes[rand() % 7];
+
 	//Make list of tetrominoes to sync between all players in multiplayer
+	std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+//		vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
+	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 	for (int i = 0; i < 30; i++) {
-		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
-//			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
-
-		while (tetrominoVec.size()) {
-			int index = rand() % tetrominoVec.size();
-			player->tetrominoes.push_back(tetrominoVec[index]);
-			tetrominoVec.erase(tetrominoVec.begin() + index);
-		}
+		shuffle(begin(tetrominoVec), end(tetrominoVec), rng);
+		player->tetrominoes.insert(player->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
 	}
 }
 
@@ -88,7 +85,7 @@ void SoloGameScene::RenderGraphics() {
 	engine->Clear(olc::DARK_BLUE);
 
 	player->DrawGrid();
-	player->DrawTetromino();
+	player->DrawActiveTetromino();
 
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Deleted rows", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, std::to_string(player->deletedRows), olc::WHITE, 1);
@@ -136,7 +133,8 @@ void SoloGameScene::RenderGraphics() {
 
 void SoloGameScene::Load() {
     sceneManager->serverCon.FetchSoloScore(sceneManager->data.playerName);
-    player = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() / 2);
+    player = new TetrisPlayer(engine, engine->ScreenWidth() / 2, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
+	player->ActivateNextTetrominoPanel(engine->ScreenWidth() * 3 / 4, engine->ScreenHeight() / 3);
 
 	gameStarted = false;
 	gameFinished = false;

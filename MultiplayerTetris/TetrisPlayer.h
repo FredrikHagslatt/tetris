@@ -54,11 +54,16 @@ public:
 	int sentRows = 0;
 
 	//grid placement
-	int yStart;	int yEnd;
-	int xStart;	int xEnd;
+	int yStart;
+	int xStart;
 	int section;
 	int edge;
 	int tile;
+
+	//NextTetrominoPanel placement
+	bool showNextTetrominoPanel = false;
+	int xPanel; 
+	int yPanel;
 
 	//default controls
 	olc::Key buttonLeft = olc::LEFT;
@@ -69,19 +74,18 @@ public:
 	olc::Key buttonRotateClockwise = olc::UP;
 	olc::Key buttonRotateCounterClockwise = olc::Z;
 
-
 	std::list<Tetromino*> tetrominoes; //Assigned by GameScene for sync in multiplayer
 	Tetromino* activeTetromino = nullptr;
+	Tetromino* nextTetromino = nullptr;
 
-	void SetDownAutoSpeed(float _downAutoSpeed);
 	void SpawnNewTetromino();
 	void AddRows(int rows);
-
-	void DrawTetromino();
+	void DrawActiveTetromino();
+	void DrawNextTetromino(int x, int y);
 	void DrawGrid();
 	void Controller(float fElapsedTime);
-
-	TetrisPlayer(olc::PixelGameEngine* _engine, int _yStart, int _yEnd, int _xCenter);
+	void ActivateNextTetrominoPanel(int xCenter, int y);
+	TetrisPlayer(olc::PixelGameEngine* _engine, int _xCenter, int _yStart, int _yEnd);
 
 };
 #endif

@@ -102,7 +102,4 @@
   <ItemGroup>
     <Text Include="TODO.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>

@@ -22,24 +22,16 @@ void SplitScreenGameScene::DrawBoxString(int y, std::string text, int scale = 1,
 void SplitScreenGameScene::InitiateTetrominoes() {
 	player1->tetrominoes.clear();
 	player2->tetrominoes.clear();
-
-	Tetromino* newTetromino = &tetrominoTypes[rand() % 7];
-	player1->activeTetromino = newTetromino;
-	player2->activeTetromino = newTetromino;
 	
 	//Make list of tetrominoes to sync between all players in multiplayer
+	std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
+//		vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
+	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 	for (int i = 0; i < 30; i++) {
-
-		std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
-//			vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
-
-		while (tetrominoVec.size()) {
-			int index = rand() % tetrominoVec.size();
-			player1->tetrominoes.push_back(tetrominoVec[index]);
-			player2->tetrominoes.push_back(tetrominoVec[index]);
-			tetrominoVec.erase(tetrominoVec.begin() + index);
-		}
+		shuffle(begin(tetrominoVec), end(tetrominoVec), rng);
+		player1->tetrominoes.insert(player1->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
+		player2->tetrominoes.insert(player2->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
 	}
 }
 
@@ -82,8 +74,8 @@ void SplitScreenGameScene::Update(float fElapsedTime) {
 		if (speedIncreaseTimer > 180.0f && downAutoSpeed > 0.3f) {
 			speedIncreaseTimer = 0.0f;
 			downAutoSpeed -= 0.1f;
-			player1->SetDownAutoSpeed(downAutoSpeed);
-			player2->SetDownAutoSpeed(downAutoSpeed);
+			player1->downAutoSpeed = downAutoSpeed;
+			player2->downAutoSpeed = downAutoSpeed;
 		}
 		player1->Controller(fElapsedTime);
 		player2->Controller(fElapsedTime);
@@ -104,8 +96,8 @@ void SplitScreenGameScene::RenderGraphics() {
 	player1->DrawGrid();
 	player2->DrawGrid();
 
-	player1->DrawTetromino();
-	player2->DrawTetromino();
+	player1->DrawActiveTetromino();
+	player2->DrawActiveTetromino();
 
 	//player1 controls
 	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 - 5,  "Controls:", olc::WHITE, 1);
@@ -176,8 +168,8 @@ void SplitScreenGameScene::Load() {
 	gameStarted = false;
 	gameFinished = false;
 
-	player1 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 7 / 20);
-	player2 = new TetrisPlayer(engine, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20, engine->ScreenWidth() * 13 / 20);
+	player1 = new TetrisPlayer(engine, engine->ScreenWidth() * 7 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
+	player2 = new TetrisPlayer(engine, engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
 
 	downAutoSpeed = 0.5f;
 	speedIncreaseTimer = 0.0f;
