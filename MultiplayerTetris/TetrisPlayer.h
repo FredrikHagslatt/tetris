@@ -80,12 +80,10 @@ public:
 
 	void SpawnNewTetromino();
 	void AddRows(int rows);
-
-	void DrawTetromino(int x, int y, Tetromino* tetromino);
 	void DrawActiveTetromino();
+	void DrawNextTetromino(int x, int y);
 	void DrawGrid();
 	void Controller(float fElapsedTime);
-
 	void ActivateNextTetrominoPanel(int xCenter, int y);
 	TetrisPlayer(olc::PixelGameEngine* _engine, int _xCenter, int _yStart, int _yEnd);
 

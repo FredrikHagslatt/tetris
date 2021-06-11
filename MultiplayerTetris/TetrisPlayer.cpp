@@ -281,26 +281,6 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 }
 
 
-void TetrisPlayer::DrawTetromino(int x, int y, Tetromino* tetromino) {
-	for (int i = 0; i < 16; i++) {
-		if (nextTetromino->shape[i]) {
-			engine->FillRect(x + edge + section * tetromino->XOffset(i, 0),
-				y + edge + section * tetromino->YOffset(i, 0),
-				tile,
-				tile,
-				colors[tetromino->color]);
-		}
-		else {
-			engine->FillRect(x + edge + section * tetromino->XOffset(i, 0),
-				y + edge + section * tetromino->YOffset(i, 0),
-				tile,
-				tile,
-				colors[0]);
-		}
-	}
-}
-
-
 void TetrisPlayer::DrawActiveTetromino() {
 	for (int i = 0; i < 16; i++) {
 		if (activeTetromino->shape[i]) {
@@ -314,6 +294,19 @@ void TetrisPlayer::DrawActiveTetromino() {
 }
 
 
+void TetrisPlayer::DrawNextTetromino(int x, int y) {
+	for (int i = 0; i < 16; i++) {
+		if (nextTetromino->shape[i]) {
+			engine->FillRect(x + section * nextTetromino->XOffset(i, 0),
+				y + section * nextTetromino->YOffset(i, 0),
+				tile,
+				tile,
+				colors[nextTetromino->color]);
+		}
+	}
+}
+
+
 void TetrisPlayer::DrawGrid() {
 	for (int i = 0; i < gridWidth * gridHeight; i++) {
 		engine->FillRect(xStart + edge + section * GetX(i),
@@ -322,8 +315,9 @@ void TetrisPlayer::DrawGrid() {
 			tile,
 			colors[grid[i]]);
 	}
+
 	if (showNextTetrominoPanel) {
-		DrawTetromino(xPanel, yPanel, nextTetromino);
+		DrawNextTetromino(xPanel, yPanel);
 	}
 }
 
