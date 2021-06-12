@@ -240,7 +240,7 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 				sideHeldTimer = 0.0;
 			}
 		}
-		else if (sideHeldTimer > 0.12) {
+		else if (sideHeldTimer > 0.1) {
 			sideHeldStarted = true;
 			sideHeldTimer = 0.0f;
 		}
@@ -257,7 +257,7 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 				sideHeldTimer = 0.0;
 			}
 		}
-		else if (sideHeldTimer > 0.06) {
+		else if (sideHeldTimer > 0.1) {
 			sideHeldStarted = true;
 			sideHeldTimer = 0.0f;
 		}
