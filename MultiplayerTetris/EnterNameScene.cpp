@@ -43,8 +43,14 @@ void EnterNameScene::Update(float fElapsedTime) {
 
 void EnterNameScene::RenderGraphics() {
 	engine->Clear(olc::DARK_BLUE);
-	engine->DrawString(engine->ScreenWidth() / 3, engine->ScreenHeight() / 2 - 10, "Please enter nickname:", olc::WHITE);
-	engine->DrawString(engine->ScreenWidth() * 3 / 7, engine->ScreenHeight() / 2 + 10, sceneManager->data.playerName, olc::WHITE);
+	std::string text = "Please enter nickname:";
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() / 2 - 10, text, olc::WHITE);
+	text = sceneManager->data.playerName;
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() / 2 + 10, text, olc::WHITE);
+	text = "Made using olc::PixelGameEngine";
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() * 39 / 40 - 15, text, olc::WHITE);
+	text = "Copyright 2018 - 2020 OneLoneCoder.com";
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() * 39 / 40, text, olc::WHITE);
 }
 
 void EnterNameScene::Load() {

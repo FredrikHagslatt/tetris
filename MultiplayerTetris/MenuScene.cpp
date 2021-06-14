@@ -17,11 +17,19 @@ void MenuScene::Update(float fElapsedTime) {
 
 void MenuScene::RenderGraphics() {
 	engine->Clear(olc::DARK_BLUE);
-	engine->DrawString(engine->ScreenWidth() / 4, engine->ScreenHeight() / 2 - 40, "Solo - 3 Min Sprint", olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() / 4, engine->ScreenHeight() / 2 - 20, "Local Multiplayer", olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() / 4, engine->ScreenHeight() / 2, "Online Multiplayer", olc::WHITE, 2);
-	engine->DrawString(engine->ScreenWidth() / 4, engine->ScreenHeight() / 2 + 20, "Solo Leaderboard", olc::WHITE, 2);
-	engine->FillCircle(engine->ScreenWidth() / 4 - 30, engine->ScreenHeight() / 2 + (menuPos - 1) * 20 - 15, 6);
+	int x = (engine->ScreenWidth() - engine->GetTextSize("Made using olc::PixelGameEngine").x) / 2;
+	engine->DrawString(x, engine->ScreenHeight() / 2 - 40, "Solo - 3 Min Sprint", olc::WHITE, 2);
+	engine->DrawString(x, engine->ScreenHeight() / 2 - 20, "Local Multiplayer", olc::WHITE, 2);
+	engine->DrawString(x, engine->ScreenHeight() / 2, "Online Multiplayer", olc::WHITE, 2);
+	engine->DrawString(x, engine->ScreenHeight() / 2 + 20, "Solo Leaderboard", olc::WHITE, 2);
+	engine->FillCircle(x - 30, engine->ScreenHeight() / 2 + (menuPos - 1) * 20 - 15, 6);
+
+
+	std:: string text = "Made using olc::PixelGameEngine";
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() * 39 / 40 - 15, text, olc::WHITE);
+	text = "Copyright 2018 - 2020 OneLoneCoder.com";
+	engine->DrawString((engine->ScreenWidth() - engine->GetTextSize(text).x) / 2, engine->ScreenHeight() * 39 / 40, text, olc::WHITE);
+
 }
 
 void MenuScene::Load() {
