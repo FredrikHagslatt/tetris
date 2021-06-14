@@ -25,14 +25,13 @@ void SplitScreenGameScene::InitiateTetrominoes() {
 	
 	//Make list of tetrominoes to sync between all players in multiplayer
 	std::vector<Tetromino*> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L }; //Single bag randomizer
-//		vector<Tetromino> tetrominoVec{ &I, &O, &T, &S, &Z, &J, &L, &I, &O, &T, &S, &Z, &J, &L }; //Double bag randomizer
 
 	std::default_random_engine rng = std::default_random_engine{ std::random_device{}() };
 	for (int i = 0; i < 30; i++) {
 		shuffle(begin(tetrominoVec), end(tetrominoVec), rng);
 		player1->tetrominoes.insert(player1->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
-		player2->tetrominoes.insert(player2->tetrominoes.end(), tetrominoVec.begin(), tetrominoVec.end());
 	}
+	player2->tetrominoes.insert(player2->tetrominoes.end(), player1->tetrominoes.begin(), player1->tetrominoes.end()); //Both players should have the same series of tetrominoes
 }
 
 
@@ -100,40 +99,40 @@ void SplitScreenGameScene::RenderGraphics() {
 	player2->DrawActiveTetromino();
 
 	//player1 controls
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 - 5,  "Controls:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 15, "Left Arrow:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 25, "Move Left", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 40, "Right Arrow:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 50, "Move Right", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 65, "Down Arrow:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 75, "Soft Drop", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 90, "Up Arrow:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 100, "Rotate", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 110, "clockwise", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 125, "L:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 135, "Rotate", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 145, "counter", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 155, "clockwise", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 170, "K:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() / 5 + 180, "Hard Drop", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 - 5,  "Controls:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 15, "Left Arrow:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 25, "Move Left", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 40, "Right Arrow:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 50, "Move Right", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 65, "Down Arrow:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 75, "Soft Drop", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 90, "Up Arrow:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 100, "Rotate", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 110, "clockwise", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 125, "L:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 135, "Rotate", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 145, "counter", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 155, "clockwise", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 170, "K:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 4 / 5, engine->ScreenHeight() * 2 / 5 + 180, "Hard Drop", olc::WHITE, 1);
 
 	//player2 controls
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 - 5,	"Controls:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 15, "A:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 25, "Move Left", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 40, "D:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 50, "Move Right", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 65, "S:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 75, "Soft Drop", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 90, "W:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 100, "Rotate", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 110, "clockwise", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 125, "Q:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 135, "Rotate", olc::WHITE, 1);	
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 145, "counter", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 155, "clockwise", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 170, "TAB:", olc::WHITE, 1);
-	engine->DrawString(engine->ScreenWidth() / 40, engine->ScreenHeight() / 5 + 180, "Hard Drop", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 - 5,	"Controls:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 15, "A:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 25, "Move Left", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 40, "D:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 50, "Move Right", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 65, "S:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 75, "Soft Drop", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 90, "W:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 100, "Rotate", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 110, "clockwise", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 125, "Q:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 135, "Rotate", olc::WHITE, 1);	
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 145, "counter", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 155, "clockwise", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 170, "TAB:", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 180, "Hard Drop", olc::WHITE, 1);
 
 	if (!gameStarted) {
 		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete multiple rows simultaneously to add rows to your opponent");
@@ -170,6 +169,10 @@ void SplitScreenGameScene::Load() {
 
 	player1 = new TetrisPlayer(engine, engine->ScreenWidth() * 7 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
 	player2 = new TetrisPlayer(engine, engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10, engine->ScreenHeight() * 19 / 20);
+
+	player1->ActivateNextTetrominoPanel(engine->ScreenWidth() * 13 / 60, engine->ScreenHeight() / 6);
+	player2->ActivateNextTetrominoPanel(engine->ScreenWidth() * 18 / 20, engine->ScreenHeight() / 6);
+
 
 	downAutoSpeed = 0.5f;
 	speedIncreaseTimer = 0.0f;
