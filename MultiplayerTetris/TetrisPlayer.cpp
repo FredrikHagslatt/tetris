@@ -226,21 +226,21 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 
 	if (engine->GetKey(buttonSoftDrop).bHeld) {
 		downHeldTimer = downHeldTimer + fElapsedTime;
-		if (downHeldTimer >= 0.03) {
+		if (downHeldTimer >= downHeldSpeed) {
 			MoveDown(false);
-			downHeldTimer = 0.0;
+			downHeldTimer = 0.0f;
 		}
 	}
 
 	if (engine->GetKey(buttonLeft).bHeld) {
 		if (sideHeldStarted) {
 			sideHeldTimer = sideHeldTimer + fElapsedTime;
-			if (sideHeldTimer >= 0.05) {
+			if (sideHeldTimer >= sideHeldSpeed) {
 				MoveLeft();
-				sideHeldTimer = 0.0;
+				sideHeldTimer = 0.0f;
 			}
 		}
-		else if (sideHeldTimer > 0.1) {
+		else if (sideHeldTimer > sideHeldThreshold) {
 			sideHeldStarted = true;
 			sideHeldTimer = 0.0f;
 		}
@@ -252,12 +252,12 @@ void TetrisPlayer::Controller(float fElapsedTime) {
 	if (engine->GetKey(buttonRight).bHeld) {
 		if (sideHeldStarted) {
 			sideHeldTimer = sideHeldTimer + fElapsedTime;
-			if (sideHeldTimer >= 0.05) {
+			if (sideHeldTimer >= sideHeldSpeed) {
 				MoveRight();
-				sideHeldTimer = 0.0;
+				sideHeldTimer = 0.0f;
 			}
 		}
-		else if (sideHeldTimer > 0.1) {
+		else if (sideHeldTimer > sideHeldThreshold) {
 			sideHeldStarted = true;
 			sideHeldTimer = 0.0f;
 		}

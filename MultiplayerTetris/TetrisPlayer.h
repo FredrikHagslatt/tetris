@@ -18,10 +18,16 @@ private:
 	std::string playerName = "";
 
 	int grid[gridWidth * gridHeight] = { 0 };
+
 	float downAutoTimer = 0.0f;
 	float downHeldTimer = 0.0f;
+	const float downHeldSpeed = 0.03f;
+
 	bool sideHeldStarted = 0.0f;
 	float sideHeldTimer = 0.0f;
+	const float sideHeldThreshold = 0.1f;
+	const float sideHeldSpeed = 0.05f;
+
 	int xPos = 5;
 	int yPos = 5;
 	int rotation = 0;
