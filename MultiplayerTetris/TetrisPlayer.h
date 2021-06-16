@@ -25,7 +25,7 @@ private:
 
 	bool sideHeldStarted = 0.0f;
 	float sideHeldTimer = 0.0f;
-	const float sideHeldThreshold = 0.6f;
+	const float sideHeldThreshold = 0.15f;
 	const float sideHeldSpeed = 0.05f;
 
 	int xPos = 5;
