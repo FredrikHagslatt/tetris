@@ -1,9 +1,6 @@
-Show game board at the end of the game
-Start button on all game modes
 
 Move tetromino if rotation is blocked by wall
 
-View next tetromino
 
 Anti-Cheat
 	Memory injection
@@ -15,4 +12,11 @@ Lobby names:
 	Fleshripping Jollyhamsters
 
 	Noisy Ninjas
+	Bourgeoisie Berserkers
+	Holy Heretics
+	Harmless Huskars
+	Woolly Warriors
+
+
+
 
