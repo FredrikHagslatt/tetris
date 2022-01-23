@@ -87,7 +87,7 @@ void SoloGameScene::RenderGraphics() {
 	player->DrawGrid();
 	player->DrawActiveTetromino();
 
-	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Deleted rows", olc::WHITE, 1);
+	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 15, "Cleared rows", olc::WHITE, 1);
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 25, std::to_string(player->deletedRows), olc::WHITE, 1);
 
 	engine->DrawString(engine->ScreenWidth() * 13 / 20, engine->ScreenHeight() / 10 + 45, "Seconds: ", olc::WHITE, 1);
@@ -116,7 +116,7 @@ void SoloGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() / 5, engine->ScreenHeight() / 10 + 225, "Hard Drop",	olc::WHITE, 1);
 
 	if (!gameStarted) {
-		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete as many rows as possible before the time runs out");
+		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Clear as many rows as possible before the time runs out");
 		DrawBoxString(engine->ScreenHeight() / 2, "Press ENTER to start the game");
 	}
 	else if (gameFinished) {

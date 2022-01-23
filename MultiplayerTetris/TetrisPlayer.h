@@ -40,12 +40,14 @@ private:
 	bool CheckCollisionLeft();
 	bool CheckCollisionRight();
 	bool CheckCollisionDown();
+	bool CheckCollisionUp();
 	void DeleteRow(int row);
 	void CheckRowDeletion();
 	void WriteTetrominoToGrid();
 
 	void MoveLeft();
 	void MoveRight();
+	void MoveUp();
 	bool MoveDown(bool newSpawn);
 	void RotateClockwise();
 	void RotateCounterClockwise();

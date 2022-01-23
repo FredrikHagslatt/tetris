@@ -67,6 +67,18 @@ bool TetrisPlayer::CheckCollisionDown() {
 }
 
 
+bool TetrisPlayer::CheckCollisionUp() {
+	for (int i = 0; i < 16; i++) {
+		if (activeTetromino->shape[i]) {
+			if (grid[GetIndex(xPos + activeTetromino->XOffset(i, rotation), yPos + activeTetromino->YOffset(i, rotation) - 1)]) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
 void TetrisPlayer::DeleteRow(int row) {
 	for (int x = 0; x < gridWidth; x++) { //Delete row
 		grid[GetIndex(x, row)] = 0;
@@ -168,6 +180,11 @@ void TetrisPlayer::MoveLeft() {
 
 void TetrisPlayer::MoveRight() {
 	if (!CheckCollisionRight()) { xPos++; }
+}
+
+
+void TetrisPlayer::MoveUp() {
+	if (!CheckCollisionUp()) { yPos--; }
 }
 
 

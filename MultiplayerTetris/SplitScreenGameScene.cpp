@@ -135,7 +135,7 @@ void SplitScreenGameScene::RenderGraphics() {
 	engine->DrawString(engine->ScreenWidth() * 3 / 40, engine->ScreenHeight() * 2 / 5 + 180, "Hard Drop", olc::WHITE, 1);
 
 	if (!gameStarted) {
-		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Delete multiple rows simultaneously to add rows to your opponent");
+		DrawBoxString(engine->ScreenHeight() / 2 - 10, "Clear multiple rows simultaneously to add rows to your opponent");
 		DrawBoxString(engine->ScreenHeight() / 2, "The last player remaining wins the game");
 		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Press ENTER to start the game");
 	}
@@ -151,7 +151,7 @@ void SplitScreenGameScene::RenderGraphics() {
 		}
 		DrawBoxString(engine->ScreenHeight() / 2 - 20, "Time played: " + std::to_string((int)timePlayed) + " seconds");
 		DrawBoxString(engine->ScreenHeight() / 2, "Player:          1           2");
-		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Deleted Rows:    " 
+		DrawBoxString(engine->ScreenHeight() / 2 + 10, "Cleared Rows:    " 
 			+ std::to_string(player1->deletedRows)
 			+ "           " 
 			+ std::to_string(player2->deletedRows));
