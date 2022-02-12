@@ -17,7 +17,7 @@ void LeaderboardScene::RenderGraphics() {
     for (unsigned int i = 0; i < 30; i++) {
         engine->DrawString(engine->ScreenWidth() / 5, 10 * i + 30, std::to_string(i + 1), olc::WHITE);
 
-        if (i < size(sceneManager->serverCon.leaderboard)) {
+        if (i < sceneManager->serverCon.leaderboard.size()) {
             engine->DrawString(engine->ScreenWidth() / 4, 10 * i + 30, sceneManager->serverCon.leaderboard[i].first, olc::WHITE);
             engine->DrawString(engine->ScreenWidth() * 2 / 3, 10 * i + 30, std::to_string(sceneManager->serverCon.leaderboard[i].second), olc::WHITE);
         }

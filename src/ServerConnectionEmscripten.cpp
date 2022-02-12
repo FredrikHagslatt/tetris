@@ -127,7 +127,7 @@ std::vector<std::pair<std::string, int>> ServerConnectionEmscripten::ParseLeader
         leaderboardSections.push_back(substr);
     }
 
-    for (int i = 0; i < size(leaderboardSections); i++) {
+    for (int i = 0; i < leaderboardSections.size(); i++) {
         std::stringstream section(leaderboardSections[i]);
         std::string name;
         std::string num;
