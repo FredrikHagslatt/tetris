@@ -1,6 +1,6 @@
 # tetris
 
-Competetive tetris. Can be played at https://games.freppan.com/tetris
+Competitive tetris. Can be played at https://games.freppan.com/tetris
 
 
 To compile with emscripten
